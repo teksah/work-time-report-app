@@ -41,6 +41,7 @@ public class DataLoader implements CommandLineRunner {
         Customer customer = Customer.builder()
                 .firstName("Liliana")
                 .lastName("Svensson")
+                .address(project1Address)
                 .build();
 
         Project project = Project.builder()
@@ -62,7 +63,7 @@ public class DataLoader implements CommandLineRunner {
                 .build();
 
         System.out.println(work1.toString());
-        System.out.println(project.getWorkers());
+
 
 
     }
