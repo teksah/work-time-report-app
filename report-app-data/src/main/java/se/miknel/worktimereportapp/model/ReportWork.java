@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class ReportWork {
+public class ReportWork extends BaseEntity{
     private Worker worker;
     private LocalDate date;
     private Project project;
