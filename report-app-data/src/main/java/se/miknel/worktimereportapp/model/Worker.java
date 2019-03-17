@@ -1,25 +1,10 @@
 package se.miknel.worktimereportapp.model;
 
-import lombok.Builder;
-import lombok.Data;
+import java.util.Set;
 
 
-@Data
 public class Worker extends Person {
     private Speciality speciality;
+    private Set<Project> projects;
 
-    @Builder
-    public Worker(String firstName, String lastName, Speciality speciality) {
-        super(firstName, lastName);
-        this.speciality = speciality;
-    }
-
-    @Override
-    public String toString() {
-        return "Worker{" +
-                "fistName=" + super.getFirstName() +", " +
-                "lastName=" + super.getLastName()+ ", " +
-                "speciality=" + speciality +
-                '}';
-    }
 }
