@@ -1,9 +1,5 @@
 package se.miknel.worktimereportapp.model;
 
-import java.io.Serializable;
-
-
-public class BaseEntity implements Serializable {
-
+public class BaseEntity {
     private Long id;
 }
