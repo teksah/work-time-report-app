@@ -1,11 +1,15 @@
 package se.miknel.worktimereportapp.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Address extends BaseEntity{
 
@@ -15,4 +19,10 @@ public class Address extends BaseEntity{
 
     @OneToOne(mappedBy = "address")
     private Project project;
+
+    public Address(String streetName, String zipCode, String city) {
+        this.streetName = streetName;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
 }

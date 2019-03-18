@@ -16,7 +16,6 @@ public class WorkerServiceImpl implements WorkerService{
         this.workerRepository = workerRepository;
     }
 
-
     @Override
     public Set<Worker> findAll() {
         Set<Worker> workers = new HashSet<>();
