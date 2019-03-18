@@ -1,15 +1,29 @@
 package se.miknel.worktimereportapp.model;
 
-import java.math.BigDecimal;
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class ReportWork extends BaseEntity{
+@Data
+@Entity
+public class Report extends BaseEntity{
+
     private LocalTime workDate;
+
+    @ManyToOne
     private Project project;
+
     private LocalDateTime startWork;
+
     private LocalDateTime finishWork;
-    private BigDecimal totalHours;
+
+    @Lob
     private String description;
+
+    @ManyToOne
     private Worker worker;
 }
