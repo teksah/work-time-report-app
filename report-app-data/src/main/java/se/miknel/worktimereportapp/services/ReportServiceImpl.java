@@ -43,4 +43,5 @@ public class ReportServiceImpl implements ReportService {
     public void deleteById(Long aLong) {
         reportRepository.deleteById(aLong);
     }
+
 }

@@ -6,7 +6,6 @@ import se.miknel.worktimereportapp.model.*;
 import se.miknel.worktimereportapp.services.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
@@ -47,14 +46,19 @@ public class DataLoader implements CommandLineRunner {
         Worker mariusz = new Worker("Mariusz", "Gaciarz");
 
         Report first = new Report(sebastian, LocalDate.now(), lidingo,
-                                LocalDateTime.of(LocalDate.now(), LocalTime.of(7, 0)),
-                                LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0)),
+                                LocalTime.of(7, 0),
+                                LocalTime.of(16, 0),
+                                false,
                                 "grund installacja kök");
 
+        first.calculateTotalHours();
+
         Report sec = new Report(mariusz, LocalDate.now(), lidingo,
-                LocalDateTime.of(LocalDate.now(), LocalTime.of(7, 0)),
-                LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0)),
+                LocalTime.of(7, 0),
+                LocalTime.of(16, 0),
+                true,
                 "grund installacja badrum");
+        sec.calculateTotalHours();
 
         sebastian.addProject(lidingo);
         mariusz.addProject(lidingo);
