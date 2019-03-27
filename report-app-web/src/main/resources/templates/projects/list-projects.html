@@ -21,11 +21,11 @@
         <div class="col-md-12">
             <div class="row mb-4">
                 <div class="page-header col-md-10">
-                    <h1 class="text-left">Your Last Reports</h1>
+                    <h1 class="text-left">Browse Projects</h1>
                 </div>
                 <div class="col-md-2 text-right mt-auto">
                     <a class="btn btn-primary btn-md" href="#"
-                       th:href="@{'/reports/new'}" role="button">Add new Report</a>
+                       th:href="@{'/projects/new'}" role="button">Add new Project</a>
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -35,28 +35,13 @@
                         #
                     </th>
                     <th>
-                        Date
+                        Project Name
                     </th>
                     <th>
-                        Project
+                        Customer
                     </th>
                     <th>
                         Address
-                    </th>
-                    <th>
-                        Start
-                    </th>
-                    <th>
-                        Finish
-                    </th>
-                    <th>
-                        Lunch
-                    </th>
-                    <th>
-                        Total
-                    </th>
-                    <th>
-                        Description
                     </th>
                 </tr>
                 </thead>
@@ -66,7 +51,7 @@
                         1
                     </td>
                     <td>
-                        01/04/2012
+                        Lubie placki
                     </td>
                     <td>
                         Vassilbygg
@@ -74,49 +59,20 @@
                     <td>
                         Brygbyvägen 13
                     </td>
-                    <td>
-                        7:00
-                    </td>
-                    <td>
-                        16:00
-                    </td>
-                    <td>
-                        Yes
-                    </td>
-                    <td>
-                        9h
-                    </td>
-                    <td>
-                        Grund instalacja
-                    </td>
+
                 </tr>
-                <tr th:each="report : ${reports}">
-                    <td th:text="${report.id}">
+                <tr th:each="project : ${projects}">
+                    <td th:text="${project.id}">
                         1
                     </td>
-                    <td th:text="${report.workDate}">
-                        01/04/2012
+                    <td th:text="${project.projectName}">
+                        hahahah
                     </td>
-                    <td th:text="${report.project.projectName}">
+                    <td th:text="${project.customer}">
                         Bla bla
                     </td>
-                    <td th:text="${report.project.address.streetName}">
+                    <td th:text="${project.address.streetName}">
                         Address 1234
-                    </td>
-                    <td th:text="${report.startWork}">
-                        7:00
-                    </td>
-                    <td th:text="${report.finishWork}">
-                        16:00
-                    </td>
-                    <td th:text="${report.lunch} ? 'Yes' : 'No'">
-                        Yes
-                    </td>
-                    <td th:text="${report.totalHours}">
-                        8h
-                    </td>
-                    <td th:text="${report.description}">
-                        Grund instalacja
                     </td>
                 </tr>
                 </tbody>

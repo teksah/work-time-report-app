@@ -3,16 +3,27 @@ package se.miknel.worktimereportapp.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.services.CustomerService;
+import se.miknel.worktimereportapp.services.ProjectService;
 
 @Controller
 public class ProjectController {
 
     private final CustomerService customerService;
+    private final ProjectService projectService;
 
-    public ProjectController(CustomerService customerService) {
+    public ProjectController(CustomerService customerService, ProjectService projectService) {
         this.customerService = customerService;
+        this.projectService = projectService;
+    }
+
+    @RequestMapping("/projects")
+    public String showAllReports(Model model) {
+        model.addAttribute("projects", projectService.findAll());
+
+        return "projects/list-projects";
     }
 
     @GetMapping("/projects/new")
