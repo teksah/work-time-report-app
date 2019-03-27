@@ -27,14 +27,17 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Customer wasil = new Customer("Pawel", "Wasil", "0700999888", "WasilBygg");
+        Customer teresa = new Customer("Teresa", "Kulon", "123456789", false, "teresa@gmail.com");
+        customerService.save(teresa);
+
+        Customer wasil = new Customer("Wasil", "Chuj", "987654321", "Wasilbygg", true, "wasilbygg@chuj.com");
         customerService.save(wasil);
 
         Address lidingoAddress = new Address("LidingoAddress 22", "123-45", "Stockholm");
         Address cityAddress = new Address("cityAddress 89", "453-12", "Stockholm");
 
         Project lidingo = new Project("Villa 3 piertra", lidingoAddress, wasil);
-        Project city = new Project("Remont mieszkania", cityAddress, wasil);
+        Project city = new Project("Remont mieszkania i dupa jasia", cityAddress, wasil);
 
         addressService.save(lidingoAddress);
         addressService.save(cityAddress);
