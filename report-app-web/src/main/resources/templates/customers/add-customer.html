@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects - Add New Project</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+    <script integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+            th:href="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<div class="container-fluid w-50 mt-5">
+    <div class="page-header mb-4">
+        <h1>Add New Customer</h1>
+    </div>
+    <!--/*@thymesVar id="customer" type="se.miknel.worktimereportapp.model.Customer"*/-->
+    <form  th:object="${customer}" th:action="@{/customer/add}" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="telephone">Telephone Number</label>
+                <input type="text" class="form-control" th:field="*{telephoneNumber}" id="telephone" placeholder="Telephone Number">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">E-mail address</label>
+                <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="E-mail address">
+            </div>
+        </div>
+
+        <script>
+            function show1(){
+                document.getElementById('div1').style.display ='none';
+            }
+            function show2(){
+                document.getElementById('div1').style.display = 'block';
+            }
+        </script>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label>Company</label>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="form-check">
+                    <input th:field="*{company}" class="form-check-input" type="radio" name="company" id="yes" value="true"
+                    onclick="show2()">
+                    <label class="form-check-label" for="yes">
+                        Yes
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="form-check">
+                    <input th:field="*{company}" class="form-check-input" type="radio" name="company" id="no" value="false"
+                    onclick="show1()">
+                    <label class="form-check-label" for="no">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="div1" style="display:none">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" class="form-control" th:field="*{companyName}" id="companyName" placeholder="Company Name">
+                </div>
+            </div>
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Add Customer"/>
+    </form>
+</div>
+</body>
+</html>

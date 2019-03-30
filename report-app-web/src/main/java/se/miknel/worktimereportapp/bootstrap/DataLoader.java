@@ -35,14 +35,18 @@ public class DataLoader implements CommandLineRunner {
 
         Address lidingoAddress = new Address("LidingoAddress 22", "123-45", "Stockholm");
         Address cityAddress = new Address("cityAddress 89", "453-12", "Stockholm");
+        Address hogdalen = new Address("Hogdalen 666", "111-11", "Stockholm");
 
         Project lidingo = new Project("Villa 3 piertra", lidingoAddress, wasil);
         Project city = new Project("Remont mieszkania i dupa jasia", cityAddress, wasil);
+        Project teresaH = new Project("Teresa Högdalen", hogdalen, teresa);
 
         addressService.save(lidingoAddress);
         addressService.save(cityAddress);
+        addressService.save(hogdalen);
         projectService.save(lidingo);
         projectService.save(city);
+        projectService.save(teresaH);
 
         Worker sebastian = new Worker("Sebastian", "Bakowski");
 

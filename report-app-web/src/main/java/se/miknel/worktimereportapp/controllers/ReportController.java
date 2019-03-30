@@ -28,21 +28,6 @@ public class ReportController {
 
         return "reports/list-reports";
     }
-//        @GetMapping("/new")
-//        public String initCreationForm(Model model) {
-//            model.addAttribute("owner", Owner.builder().build());
-//            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
-//        }
-//
-//        @PostMapping("/new")
-//        public String processCreationForm(@Valid Owner owner, BindingResult result) {
-//            if (result.hasErrors()) {
-//                return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
-//            } else {
-//                ownerService.save(owner);
-//                return "redirect:/owners/" + owner.getId();
-//            }
-//        }
 
     @GetMapping("/reports/new")
     public String initCreationForm(Model model) {
