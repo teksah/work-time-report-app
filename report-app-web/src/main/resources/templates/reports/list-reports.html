@@ -4,41 +4,14 @@
     <meta charset="UTF-8">
     <title>Reports - List</title>
 
-    <link rel="stylesheet"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-
-    <script integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"
-            th:href="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <div th:replace="fragments/header :: header-css"/>
 
 </head>
 
 <body>
 <div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 22px" >
-            <a class="navbar-brand" href="#" style="font-size: 22px">MIKNEL</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#"
-                    th:href="@{/reports/}">Reports <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#"
-                       th:href="@{/projects/}">Projects</a>
-                    <a class="nav-item nav-link" href="#"
-                       th:href="@{/customers/}">Customers</a>
+    <div th:replace="fragments/header :: header"/>
 
-                </div>
-            </div>
-        </nav>
-
-        </div>
-    </div>
     <div class="row justify-content-center mt-5 ">
         <div class="col-md-10">
             <div class="row mb-4">

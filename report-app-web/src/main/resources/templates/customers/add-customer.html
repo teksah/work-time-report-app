@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <title>Projects - Add New Project</title>
 
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-
-    <script integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"
-            th:href="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <div th:replace="fragments/header :: header-css"/>
 
 </head>
 
 <body>
-<div class="container-fluid w-50 mt-5">
-    <div class="page-header mb-4">
-        <h1>Add New Customer</h1>
-    </div>
-    <!--/*@thymesVar id="customer" type="se.miknel.worktimereportapp.model.Customer"*/-->
-    <form  th:object="${customer}" th:action="@{/customer/add}" method="post">
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/header :: header"/>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="page-header mb-4">
+                <h3 class="text-left">Add New Customer</h3>
+            </div>
+        <!--/*@thymesVar id="customer" type="se.miknel.worktimereportapp.model.Customer"*/-->
+        <form  th:object="${customer}" th:action="@{/customer/add}" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
@@ -87,6 +82,8 @@
 
         <input type="submit" class="btn btn-primary" value="Add Customer"/>
     </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>
