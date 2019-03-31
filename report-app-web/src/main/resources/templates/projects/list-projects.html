@@ -37,36 +37,21 @@
                     <th>
                         Address
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:remove="all">
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        Lubie placki
-                    </td>
-                    <td>
-                        Vassilbygg
-                    </td>
-                    <td>
-                        Brygbyvägen 13
-                    </td>
-
-                </tr>
                 <tr th:each="project : ${projects}">
-                    <td th:text="${project.id}">
-                        1
-                    </td>
-                    <td th:text="${project.projectName}">
-                        hahahah
-                    </td>
-                    <td th:text="${project.customer}">
-                        Bla bla
-                    </td>
-                    <td th:text="${project.address.streetName}">
-                        Address 1234
+                    <td th:text="${project.id}"></td>
+                    <td th:text="${project.projectName}"></td>
+                    <td th:text="${project.customer}"></td>
+                    <td th:text="${project.address.streetName}"></td>
+                    <td class="action-links">
+                        <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                        <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                        <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>

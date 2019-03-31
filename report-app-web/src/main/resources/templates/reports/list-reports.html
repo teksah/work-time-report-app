@@ -24,7 +24,7 @@
                     </a>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover ">
                 <thead>
                 <tr>
                     <th>
@@ -51,59 +51,25 @@
                     <th>
                         Description
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:remove="all">
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        01/04/2012
-                    </td>
-                    <td>
-                        Vassilbygg
-                    </td>
-                    <td>
-                        7:00
-                    </td>
-                    <td>
-                        16:00
-                    </td>
-                    <td>
-                        Yes
-                    </td>
-                    <td>
-                        9h
-                    </td>
-                    <td>
-                        Grund instalacja
-                    </td>
-                </tr>
                 <tr th:each="report : ${reports}">
-                    <td th:text="${report.id}">
-                        1
-                    </td>
-                    <td th:text="${report.workDate}">
-                        01/04/2012
-                    </td>
-                    <td th:text="${report.project.projectName}">
-                        Bla bla
-                    </td>
-                    <td th:text="${report.startWork}">
-                        7:00
-                    </td>
-                    <td th:text="${report.finishWork}">
-                        16:00
-                    </td>
-                    <td th:text="${report.lunch} ? 'Yes' : 'No'">
-                        Yes
-                    </td>
-                    <td th:text="${report.totalHours}">
-                        8h
-                    </td>
-                    <td th:text="${report.description}">
-                        Grund instalacja
+                    <td th:text="${report.id}"></td>
+                    <td th:text="${report.workDate}"></td>
+                    <td th:text="${report.project.projectName}"></td>
+                    <td th:text="${report.startWork}"></td>
+                    <td th:text="${report.finishWork}"></td>
+                    <td th:text="${report.lunch} ? 'Yes' : 'No'"></td>
+                    <td th:text="${report.totalHours}"></td>
+                    <td th:text="${report.description}"></td>
+                    <td class="action-links">
+                        <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                        <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                        <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>

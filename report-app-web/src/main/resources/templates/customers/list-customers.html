@@ -12,7 +12,7 @@
 <div class="container-fluid mt-4">
     <div th:replace="fragments/header :: header"/>
     <div class="row justify-content-center mt-5">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="row mb-4">
                 <div class="page-header col-md-10">
                     <h3 class="text-left">Browse Customers</h3>
@@ -56,43 +56,23 @@
                             <th>
                                 Email
                             </th>
+                            <th>
+                                Actions
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:remove="all">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                Jola
-                            </td>
-                            <td>
-                                Lojalna
-                            </td>
-                            <td>
-                                123455613
-                            </td>
-                            <td>
-                                example@gmail.com
-                            </td>
-
-                        </tr>
                         <tr th:each="customer : ${customers}"
                             th:if="${customer.company} == false">
-                            <td th:text="${customer.id}">
-                                1
-                            </td>
-                            <td th:text="${customer.firstName}">
-                                hahahah
-                            </td>
-                            <td th:text="${customer.lastName}">
-                                Bla bla
-                            </td>
-                            <td th:text="${customer.telephoneNumber}">
-                                Address 1234
-                            </td>
-                            <td th:text="${customer.email}">
-                                Address 1234
+                            <td th:text="${customer.id}"></td>
+                            <td th:text="${customer.firstName}"></td>
+                            <td th:text="${customer.lastName}"></td>
+                            <td th:text="${customer.telephoneNumber}"></td>
+                            <td th:text="${customer.email}"></td>
+                            <td class="action-links">
+                                <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                                <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                                <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -114,45 +94,28 @@
                             <th>
                                 Email
                             </th>
+                            <th>
+                                Actions
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:remove="all">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                WassilByg
-                            </td>
-                            <td>
-                                123455613
-                            </td>
-                            <td>
-                                example@gmail.com
-                            </td>
-                        </tr>
                         <tr th:each="customer : ${customers}"
                             th:if="${customer.company} == true">
-                            <td th:text="${customer.id}">
-                                1
-                            </td>
-                            <td th:text="${customer}">
-                                hahahah
-                            </td>
-                            <td th:text="${customer.telephoneNumber}">
-                                Address 1234
-                            </td>
-                            <td th:text="${customer.email}">
-                                Address 1234
+                            <td th:text="${customer.id}"></td>
+                            <td th:text="${customer}"></td>
+                            <td th:text="${customer.telephoneNumber}"></td>
+                            <td th:text="${customer.email}"></td>
+                            <td class="action-links">
+                                <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                                <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                                <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>
