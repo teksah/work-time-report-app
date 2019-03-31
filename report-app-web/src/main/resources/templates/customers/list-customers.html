@@ -70,7 +70,7 @@
                             <td th:text="${customer.telephoneNumber}"></td>
                             <td th:text="${customer.email}"></td>
                             <td class="action-links">
-                                <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
                                 <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
                                 <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
@@ -107,7 +107,7 @@
                             <td th:text="${customer.telephoneNumber}"></td>
                             <td th:text="${customer.email}"></td>
                             <td class="action-links">
-                                <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
                                 <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
                                 <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
@@ -116,6 +116,9 @@
                     </table>
                 </div>
             </div>
+
+
+
         </div>
     </div>
 </div>
