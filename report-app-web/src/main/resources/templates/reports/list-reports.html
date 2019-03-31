@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Reports - List</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"></div>
 
 </head>
 
 <body>
 <div class="container-fluid mt-4">
-    <div th:replace="fragments/header :: header"/>
+    <div th:replace="fragments/header :: header"></div>
 
     <div class="row justify-content-center mt-5 ">
         <div class="col-md-10">
@@ -19,8 +19,8 @@
                     <h3 class="text-left">Your Last Reports</h3>
                 </div>
                 <div class="col-md-2 text-right mt-auto">
-                    <a class="btn btn-primary btn-md" th:href="@{/reports/new}" role="button">
-                        Add Report
+                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
+                        <span class="btn-label"><i class="fas fa-plus"></i></span>Add Report
                     </a>
                 </div>
             </div>
