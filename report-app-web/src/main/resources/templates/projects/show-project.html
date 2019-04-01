@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Customer - ' + ${project.projectName}"></title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="row mb-4">
+                <div class="page-header col-md-6">
+                    <h3 class="text-left">Project Information</h3>
+                </div>
+                <!--/*@thymesVar id="project" type="se.miknel.worktimereportapp.model.Project"*/-->
+                <div class="col-md-6 text-right mt-auto">
+                    <a class="btn btn-labeled btn-primary" th:href="@{/projects/__${project.id}__/edit}" role="button">
+                        <span class="btn-label"><i class="far fa-edit"></i></span>Edit
+                    </a>
+                    <a class="btn btn-labeled btn-primary" th:href="@{/projects/__${project.id}__/remove}" role="button">
+                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>Remove
+                    </a>
+                </div>
+            </div>
+            <table class="table table-striped mb-5" th:object="${project}">
+                    <tr>
+                        <th>Project Name</th>
+                        <td th:text="*{projectName}"></td>
+                    </tr>
+                    <tr>
+                        <th>Customer</th>
+                        <td th:text="*{customer}"></td>
+                    </tr>
+                    <tr>
+                        <th>Street Address</th>
+                        <td th:text="*{address.streetName}"></td>
+                    </tr>
+                    <tr>
+                        <th>Zip Code</th>
+                        <td th:text="*{address.zipCode}"></td>
+                    </tr>
+                <tr>
+                    <th>City</th>
+                    <td th:text="*{address.city}"></td>
+                </tr>
+                </table>
+
+            <div class="row mb-2">
+                <div class="page-header col-md-6">
+                    <h3 class="text-left">Reports</h3>
+                </div>
+            </div>
+            <table class="table table-hover table-sm">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Worker</th>
+                    <th>Hours</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="report : ${project.reports}">
+                    <td th:text="${report.id}"></td>
+                    <td th:text="${report.workDate}"></td>
+                    <td th:text="${report.worker}"></td>
+                    <td th:text="${report.totalHours}"></td>
+                    <td th:text="${report.description}"></td>
+                    <td class="action-links">
+                        <a th:href="@{/reports/__${report.id}__/show}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/edit}"class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/remove}"class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

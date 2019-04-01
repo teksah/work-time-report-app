@@ -2,12 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Customer - ' + ${pageTitle}"></title>
-
+    <title th:text="'Customer - ' + ${customer}"></title>
     <div th:replace="fragments/header :: header-css"></div>
-
 </head>
-
 <body>
 <div class="container-fluid mt-4">
     <div th:replace="fragments/header :: header"></div>
@@ -18,10 +15,10 @@
                     <h3 class="text-left">Customer Information</h3>
                 </div>
                 <div class="col-md-6 text-right mt-auto">
-                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
+                    <a class="btn btn-labeled btn-primary" th:href="@{/customers/__${customer.id}__/edit}" role="button">
                         <span class="btn-label"><i class="far fa-edit"></i></span>Edit
                     </a>
-                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
+                    <a class="btn btn-labeled btn-primary" th:href="@{/customers/__${customer.id}__/remove}" role="button">
                         <span class="btn-label"><i class="far fa-trash-alt"></i></span>Remove
                     </a>
                 </div>
@@ -57,18 +54,10 @@
             <table class="table table-hover table-sm">
                 <thead>
                 <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        Project Name
-                    </th>
-                    <th>
-                        Address
-                    </th>
-                    <th>
-                        Actions
-                    </th>
+                    <th>#</th>
+                    <th>Project Name</th>
+                    <th>Address</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,7 +66,7 @@
                     <td th:text="${project.projectName}"></td>
                     <td th:text="${project.address.streetName}"></td>
                     <td class="action-links">
-                        <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/projects/__${project.id}__/show}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
                         <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
                         <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>

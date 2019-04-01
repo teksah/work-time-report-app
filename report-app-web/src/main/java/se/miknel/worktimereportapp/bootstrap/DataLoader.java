@@ -27,55 +27,71 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Customer teresa = new Customer("Teresa", "Kulon", "123456789", false, "teresa@gmail.com");
-        customerService.save(teresa);
+        Customer customer1 = new Customer("Jan", "Fasola", "123456789", "Fasola AB", true, "fasola@fasola.com");
+        Customer customer2 = new Customer("Pawel", "Gawel", "987654321", "gawel@gawel.com");
+        Customer customer3 = new Customer("Pawel", "Wasill", "666666666", "WasillBygg", true, "pawel@wasillbygg.com");
 
-        Customer wasil = new Customer("Wasil", "Chuj", "987654321", "Wasilbygg", true, "wasilbygg@chuj.com");
-        customerService.save(wasil);
+        customerService.save(customer1);
+        customerService.save(customer2);
+        customerService.save(customer3);
 
-        Address lidingoAddress = new Address("LidingoAddress 22", "123-45", "Stockholm");
-        Address cityAddress = new Address("cityAddress 89", "453-12", "Stockholm");
-        Address hogdalen = new Address("Hogdalen 666", "111-11", "Stockholm");
+        Address address1 = new Address("Centrum 12", "123-45", "Stockholm");
+        Address address2 = new Address("Alvsio 6", "111-22", "Alvsio");
+        Address address3 = new Address("Huddinge 34", "555-55", "Huddinge");
+        Address address4 = new Address("Lidingovagen 69", "686-69", "Lidingo");
 
-        Project lidingo = new Project("Villa 3 piertra", lidingoAddress, wasil);
-        Project city = new Project("Remont mieszkania i dupa jasia", cityAddress, wasil);
-        Project teresaH = new Project("Teresa Högdalen", hogdalen, teresa);
+        addressService.save(address1);
+        addressService.save(address2);
+        addressService.save(address3);
+        addressService.save(address4);
 
-        addressService.save(lidingoAddress);
-        addressService.save(cityAddress);
-        addressService.save(hogdalen);
-        projectService.save(lidingo);
-        projectService.save(city);
-        projectService.save(teresaH);
+        Project project1 = new Project("Mieszkanie Centrum", address1, customer1);
+        Project project2 = new Project("Block Alvsio", address2, customer1);
+        Project project3 = new Project("Remont Pokoju", address3, customer2);
+        Project project4 = new Project("Lustro Lazienka", address4, customer3);
 
-        Worker sebastian = new Worker("Sebastian", "Bakowski");
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
+        projectService.save(project4);
 
-        Worker mariusz = new Worker("Mariusz", "Gaciarz");
+        Worker worker1 = new Worker("Sebastian", "Bakowski");
+        Worker worker2 = new Worker("Sebastian", "Gaciarz");
+        Worker worker3 = new Worker("Mariusz", "Gaciarz");
 
-        Report first = new Report(sebastian, LocalDate.now(), lidingo,
-                                LocalTime.of(7, 0),
-                                LocalTime.of(16, 0),
-                                false,
-                                "grund installacja kök");
+        workerService.save(worker1);
+        workerService.save(worker2);
+        workerService.save(worker3);
 
-        first.calculateTotalHours();
+        Report report1 = new Report(worker1, LocalDate.now(), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "rywning grund");
+        report1.calculateTotalHours();
 
-        Report sec = new Report(mariusz, LocalDate.now(), lidingo,
-                LocalTime.of(7, 0),
-                LocalTime.of(16, 0),
-                true,
-                "grund installacja badrum");
-        sec.calculateTotalHours();
+        Report report2 = new Report(worker2, LocalDate.now(), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "rywning grund");
+        report2.calculateTotalHours();
 
-        sebastian.addProject(lidingo);
-        mariusz.addProject(lidingo);
-        workerService.save(sebastian);
-        workerService.save(mariusz);
+        Report report3 = new Report(worker3, LocalDate.now(), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), false, "kompletowanie");
+        report3.calculateTotalHours();
 
-        reportService.save(first);
-        reportService.save(sec);
+        Report report4 = new Report(worker1, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        report4.calculateTotalHours();
+
+        Report report5 = new Report(worker2, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        report5.calculateTotalHours();
+
+        Report report6 = new Report(worker3, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        report6.calculateTotalHours();
+
+        Report report7 = new Report(worker1, LocalDate.now(), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), false, "grund");
+        report7.calculateTotalHours();
 
 
+        reportService.save(report1);
+        reportService.save(report2);
+        reportService.save(report3);
+        reportService.save(report4);
+        reportService.save(report5);
+        reportService.save(report6);
+        reportService.save(report7);
 
 
 

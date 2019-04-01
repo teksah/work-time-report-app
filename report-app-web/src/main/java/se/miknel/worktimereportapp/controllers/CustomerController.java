@@ -19,12 +19,6 @@ public class CustomerController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/customers/new")
-    public String initCreationForm(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "customers/add-customer";
-    }
-
     @GetMapping("/customers")
     public String showAllCustomers(Model model) {
         model.addAttribute("customers", customerService.findAll());
@@ -32,11 +26,16 @@ public class CustomerController {
         return "customers/list-customers";
     }
 
-    @GetMapping("/customers/{customerId}")
+    @GetMapping("/customers/{customerId}/show")
     public String showCustomer(@PathVariable("customerId") Long customerId, Model model) {
         model.addAttribute("customer", customerService.findById(customerId));
-        model.addAttribute("pageTitle", customerService.findById(customerId));
 
-        return "/customers/show-customer";
+        return "customers/show-customer";
+    }
+
+    @GetMapping("/customers/new")
+    public String initCreationForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customers/add-customer";
     }
 }
