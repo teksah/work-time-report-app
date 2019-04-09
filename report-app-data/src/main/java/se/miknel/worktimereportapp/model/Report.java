@@ -1,8 +1,7 @@
 package se.miknel.worktimereportapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,9 +21,10 @@ public class Report extends BaseEntity{
 
     private LocalTime finishWork;
 
-    private boolean lunch;
+    @Enumerated(value = EnumType.STRING)
+    private Lunch lunch;
 
-    private Long totalHours;
+    private BigDecimal totalHours;
 
     @Lob
     private String description;
@@ -32,7 +32,7 @@ public class Report extends BaseEntity{
     public Report() {
     }
 
-    public Report(Worker worker, LocalDate workDate, Project project, LocalTime startWork, LocalTime finishWork, boolean lunch, String description) {
+    public Report(Worker worker, LocalDate workDate, Project project, LocalTime startWork, LocalTime finishWork, Lunch lunch, String description) {
         this.worker = worker;
         this.workDate = workDate;
         this.project = project;
@@ -42,13 +42,8 @@ public class Report extends BaseEntity{
         this.description = description;
     }
 
-    public Long calculateTotalHours() {
-
-        if (!lunch) {
-            return this.totalHours = Duration.between(startWork, finishWork).toHours();
-        }
-
-        return this.totalHours = Duration.between(startWork, finishWork).toHours() - 1;
+    public BigDecimal calculateTotalHours() {
+            return this.totalHours = BigDecimal.valueOf(Duration.between(startWork, finishWork).toHours()).subtract(this.lunch.getTime());
     }
 
     public Worker getWorker() {
@@ -91,19 +86,19 @@ public class Report extends BaseEntity{
         this.finishWork = finishWork;
     }
 
-    public boolean isLunch() {
+    public Lunch getLunch() {
         return lunch;
     }
 
-    public void setLunch(boolean lunch) {
+    public void setLunch(Lunch lunch) {
         this.lunch = lunch;
     }
 
-    public Long getTotalHours() {
+    public BigDecimal getTotalHours() {
         return totalHours;
     }
 
-    public void setTotalHours(Long totalHours) {
+    public void setTotalHours(BigDecimal totalHours) {
         this.totalHours = totalHours;
     }
 

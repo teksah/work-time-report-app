@@ -15,7 +15,7 @@
         <div class="col-md-9">
             <div class="row mb-4">
                 <div class="page-header col-md-10">
-                    <h3 class="text-left">Browse Customers</h3>
+                    <h3 class="text-left">Customers</h3>
                 </div>
             </div>
             <div class="row mb-3">
@@ -42,25 +42,26 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
                             <th>Telephone</th>
                             <th>Email</th>
-                            <th>Actions</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="customer : ${customers}"
                             th:if="${customer.company} == false">
                             <td th:text="${customer.id}"></td>
-                            <td th:text="${customer.firstName}"></td>
-                            <td th:text="${customer.lastName}"></td>
+                            <td>
+                                <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
+
+                            </td>
                             <td th:text="${customer.telephoneNumber}"></td>
                             <td th:text="${customer.email}"></td>
                             <td class="action-links">
                                 <a th:href="@{/customers/__${customer.id}__/show}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                                <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                                <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__/edit}" class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__/remove}" class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -74,20 +75,22 @@
                             <th>Company Name</th>
                             <th>Telephone</th>
                             <th>Email</th>
-                            <th>Actions</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="customer : ${customers}"
                             th:if="${customer.company} == true">
                             <td th:text="${customer.id}"></td>
-                            <td th:text="${customer}"></td>
+                            <td>
+                                <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
+                            </td>
                             <td th:text="${customer.telephoneNumber}"></td>
                             <td th:text="${customer.email}"></td>
                             <td class="action-links">
                                 <a th:href="@{/customers/__${customer.id}__/show}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                                <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                                <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__/edit}" class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                                <a th:href="@{/customers/__${customer.id}__/remove}"class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         </tbody>

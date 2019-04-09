@@ -53,4 +53,10 @@ public class Address extends BaseEntity{
     public void setProject(Project project) {
         this.project = project;
     }
+
+
+    @Override
+    public String toString() {
+        return streetName+", "+zipCode+" "+city;
+    }
 }

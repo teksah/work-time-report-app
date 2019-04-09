@@ -59,29 +59,39 @@ public class DataLoader implements CommandLineRunner {
         Worker worker2 = new Worker("Sebastian", "Gaciarz");
         Worker worker3 = new Worker("Mariusz", "Gaciarz");
 
+        worker1.addProject(project1);
+        worker1.addProject(project3);
+        worker1.addProject(project4);
+
+        worker2.addProject(project1);
+        worker2.addProject(project3);
+
+        worker3.addProject(project2);
+        worker3.addProject(project3);
+
         workerService.save(worker1);
         workerService.save(worker2);
         workerService.save(worker3);
 
-        Report report1 = new Report(worker1, LocalDate.now(), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "rywning grund");
+        Report report1 = new Report(worker1, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.NO_LUNCH, "rywning grund");
         report1.calculateTotalHours();
 
-        Report report2 = new Report(worker2, LocalDate.now(), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "rywning grund");
+        Report report2 = new Report(worker2, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.HALF_TIME, "rywning grund");
         report2.calculateTotalHours();
 
-        Report report3 = new Report(worker3, LocalDate.now(), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), false, "kompletowanie");
+        Report report3 = new Report(worker3, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "kompletowanie");
         report3.calculateTotalHours();
 
-        Report report4 = new Report(worker1, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        Report report4 = new Report(worker1, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.NO_LUNCH, "spotkanie");
         report4.calculateTotalHours();
 
-        Report report5 = new Report(worker2, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        Report report5 = new Report(worker2, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "spotkanie");
         report5.calculateTotalHours();
 
-        Report report6 = new Report(worker3, LocalDate.now(), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), true, "spotkanie");
+        Report report6 = new Report(worker3, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "spotkanie");
         report6.calculateTotalHours();
 
-        Report report7 = new Report(worker1, LocalDate.now(), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), false, "grund");
+        Report report7 = new Report(worker1, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "grund");
         report7.calculateTotalHours();
 
 
