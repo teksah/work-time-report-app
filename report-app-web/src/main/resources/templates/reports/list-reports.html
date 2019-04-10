@@ -35,23 +35,25 @@
                     <th>Rest</th>
                     <th>Total</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="report : ${reports}">
                     <td th:text="${report.id}"></td>
                     <td th:text="${report.workDate}"></td>
-                    <td th:text="${report.project.projectName}"></td>
+                    <td>
+                        <a th:href="@{/projects/__${report.project.id}__/show}" th:text="${report.project.projectName}"></a>
+                    </td>
                     <td th:text="${report.worker}"></td>
                     <td th:text="${report.startWork} + ' - ' + ${report.finishWork}"></td>
                     <td th:text="${report.lunch.time}"></td>
                     <td th:text="${report.totalHours}"></td>
                     <td th:text="${report.description}"></td>
                     <td class="action-links">
-                        <a class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                        <a class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                        <a class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/show}"class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/edit}"class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/remove}"class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>

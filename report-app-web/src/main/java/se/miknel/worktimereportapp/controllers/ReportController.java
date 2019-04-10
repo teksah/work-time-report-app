@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.miknel.worktimereportapp.model.Report;
@@ -27,6 +28,13 @@ public class ReportController {
         model.addAttribute("reports", reportService.findAll());
 
         return "reports/list-reports";
+    }
+
+    @RequestMapping("/reports/{reportId}/show")
+    public String showReport(@PathVariable Long reportId, Model model) {
+        model.addAttribute("report", reportService.findById(reportId));
+
+        return "reports/show-report";
     }
 
     @GetMapping("/reports/new")

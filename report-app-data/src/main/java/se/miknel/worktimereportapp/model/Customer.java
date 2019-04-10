@@ -23,7 +23,6 @@ public class Customer extends Person {
     public Customer(String firstName, String lastName, String telephoneNumber, String email) {
         super(firstName, lastName);
         this.telephoneNumber = telephoneNumber;
-        this.company = company;
         this.email = email;
     }
 
