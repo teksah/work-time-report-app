@@ -1,8 +1,11 @@
 package se.miknel.worktimereportapp.services;
 
 import org.springframework.stereotype.Service;
+import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
+import se.miknel.worktimereportapp.model.Worker;
 import se.miknel.worktimereportapp.repositories.ReportRepository;
+import se.miknel.worktimereportapp.repositories.WorkerRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +45,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void deleteById(Long aLong) {
         reportRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Set<Report> findReportsByProject(Project project) {
+        return reportRepository.findReportsByProject(project);
     }
 
 }

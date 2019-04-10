@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
+import se.miknel.worktimereportapp.model.Worker;
 import se.miknel.worktimereportapp.services.ProjectService;
 import se.miknel.worktimereportapp.services.ReportService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ReportController {
@@ -32,7 +36,16 @@ public class ReportController {
 
     @RequestMapping("/reports/{reportId}/show")
     public String showReport(@PathVariable Long reportId, Model model) {
-        model.addAttribute("report", reportService.findById(reportId));
+        Report report = reportService.findById(reportId);
+
+        model.addAttribute("report", report);
+
+        Project project = reportService.findById(reportId).getProject();
+
+        Set<Report> reportsByProject = reportService.findReportsByProject(project);
+        reportsByProject.remove(report);
+
+        model.addAttribute("reports", reportsByProject);
 
         return "reports/show-report";
     }
