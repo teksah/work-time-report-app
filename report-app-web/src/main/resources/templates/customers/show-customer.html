@@ -61,6 +61,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr th:if="${#lists.isEmpty(customer.projects)}">
+                    <td colspan="4" class="text-center"> No Projects Available </td>
+                </tr>
                 <tr th:each="project : ${customer.projects}">
                     <td th:text="${project.id}"></td>
                     <td>

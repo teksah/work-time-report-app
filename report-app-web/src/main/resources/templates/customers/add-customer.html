@@ -17,21 +17,21 @@
                 <h3 class="text-left">Add New Customer</h3>
             </div>
         <!--/*@thymesVar id="customer" type="se.miknel.worktimereportapp.model.Customer"*/-->
-        <form  th:object="${customer}" th:action="@{/customer/add}" method="post">
+        <form action="#" th:action="@{/customers/add}" th:object="${customer}"  method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="First Name">
+                <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+                <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name" class="form-control">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="telephone">Telephone Number</label>
-                <input type="text" class="form-control" th:field="*{telephoneNumber}" id="telephone" placeholder="Telephone Number">
+                <input type="text" th:field="*{telephoneNumber}" id="telephone" placeholder="Telephone Number" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label for="email">E-mail address</label>
@@ -53,8 +53,7 @@
             </div>
             <div class="form-group col-md-2">
                 <div class="form-check">
-                    <input th:field="*{company}" class="form-check-input" type="radio" name="company" id="yes" value="true"
-                    onclick="show2()">
+                    <input type="radio" th:field="*{company}" class="form-check-input" name="company" id="yes" th:value="true" onclick="show2()">
                     <label class="form-check-label" for="yes">
                         Yes
                     </label>
@@ -62,7 +61,7 @@
             </div>
             <div class="form-group col-md-2">
                 <div class="form-check">
-                    <input th:field="*{company}" class="form-check-input" type="radio" name="company" id="no" value="false"
+                    <input th:field="*{company}" class="form-check-input" type="radio" name="company" id="no" th:value="false"
                     onclick="show1()">
                     <label class="form-check-label" for="no">
                         No
