@@ -37,7 +37,6 @@
                 <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="E-mail address">
             </div>
         </div>
-
         <script>
             function show1(){
                 document.getElementById('div1').style.display ='none';
@@ -68,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div id="div1" style="display:none">
+        <div id="div1" th:if="*{company}" style="display:block">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="companyName">Company Name</label>
@@ -76,8 +75,6 @@
                 </div>
             </div>
         </div>
-
-
         <input type="submit" class="btn btn-primary" value="Update Customer"/>
     </form>
         </div>

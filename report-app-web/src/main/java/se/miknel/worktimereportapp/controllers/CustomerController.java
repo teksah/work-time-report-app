@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/add")
-    public String addCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+    public String addCustomer(@Valid Customer customer, BindingResult result) {
         if (result.hasErrors()) {
             return "customers/add-customer";
         }
