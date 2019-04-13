@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import se.miknel.worktimereportapp.model.Customer;
 import se.miknel.worktimereportapp.repositories.CustomerRepository;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 

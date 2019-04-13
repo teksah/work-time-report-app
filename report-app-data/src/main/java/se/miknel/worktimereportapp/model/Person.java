@@ -1,12 +1,15 @@
 package se.miknel.worktimereportapp.model;
 
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotEmpty;
 
 
 @MappedSuperclass
 public class Person extends BaseEntity{
 
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
 
     public Person() {

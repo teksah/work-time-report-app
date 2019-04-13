@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Projects - Add New Project</title>
+    <title th:text="'Update Customer - ' + ${customer}"></title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -13,14 +13,9 @@
     <div th:replace="fragments/header :: header"/>
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-
-        <!--/*@thymesVar id="customer" type="se.miknel.worktimereportapp.model.Customer"*/-->
-        <form action="#" th:action="@{/customers/add}" th:object="${customer}"  method="post">
-            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger pb-0">
-                <p>Please Correct Errors Below</p>
-            </div>
+        <form action="#" th:action="@{/customers/{id}/update/(id=${customer.id})}" th:object="${customer}"  method="post">
             <div class="page-header mb-4">
-                <h3 class="text-left">Add New Customer</h3>
+                <h3 class="text-left">Update Customer</h3>
             </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -83,7 +78,7 @@
         </div>
 
 
-        <input type="submit" class="btn btn-primary" value="Add Customer"/>
+        <input type="submit" class="btn btn-primary" value="Update Customer"/>
     </form>
         </div>
     </div>
