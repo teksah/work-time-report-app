@@ -17,7 +17,7 @@
                 <h3 class="text-left">Add New Project</h3>
             </div>
             <!--/*@thymesVar id="project" type="se.miknel.worktimereportapp.model.Project"*/-->
-            <form th:object="${project}" th:action="@{/reports/add}" method="post">
+            <form th:object="${project}" th:action="@{/projects/add}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="ProjectName">Project Name</label>
@@ -29,8 +29,8 @@
                         <select th:field="*{customer}" id="customer" class="form-control">
                             <option value="">Choose...</option>
                             <option th:each="customer : ${customers}"
-                                    th:value="${customer}"
-                                    th:text="${customer}">bl bla bla
+                                    th:value="${customer.id}"
+                                    th:utext="${customer}">
                             </option>
                         </select>
                     </div>

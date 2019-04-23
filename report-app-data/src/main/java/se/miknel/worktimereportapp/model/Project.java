@@ -11,7 +11,7 @@ public class Project extends BaseEntity{
 
     private String projectName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @ManyToOne
