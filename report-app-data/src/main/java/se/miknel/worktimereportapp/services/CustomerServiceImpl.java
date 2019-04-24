@@ -33,6 +33,11 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer save(Customer object) {
+
+        if (!object.isCompany()) {
+            object.setCompanyName(null);
+        }
+
         return customerRepository.save(object);
     }
 

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Reports - Add New Report</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"></div>
 
 </head>
 
 <body>
 <div class="container-fluid mt-4">
-    <div th:replace="fragments/header :: header"/>
+    <div th:replace="fragments/header :: header"></div>
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="page-header mb-4">
@@ -28,7 +28,7 @@
                         <select th:field="*{project}" id="projectName" class="form-control">
                             <option value="">Choose...</option>
                             <option th:each="project : ${projects}"
-                                    th:value="${project}"
+                                    th:value="${project.id}"
                                     th:text="${project.projectName}">bl bla bla
                             </option>
                         </select>
