@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
-import se.miknel.worktimereportapp.model.Worker;
 import se.miknel.worktimereportapp.services.ProjectService;
 import se.miknel.worktimereportapp.services.ReportService;
+import se.miknel.worktimereportapp.services.UnitOfRestService;
 
-import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
 
 @Controller
 public class ReportController {
     private final ReportService reportService;
     private final ProjectService projectService;
+    private final UnitOfRestService unitOfRestService;
 
-    public ReportController(ReportService reportService, ProjectService projectService) {
+    public ReportController(ReportService reportService, ProjectService projectService, UnitOfRestService unitOfRestService) {
         this.reportService = reportService;
         this.projectService = projectService;
+        this.unitOfRestService = unitOfRestService;
     }
 
     @RequestMapping("/reports")
@@ -51,19 +51,21 @@ public class ReportController {
     }
 
     @GetMapping("/reports/new")
-    public String initCreationForm(Model model) {
-        model.addAttribute("report", new Report());
+    public String showAddForm(Report report, Model model) {
+        model.addAttribute("units", unitOfRestService.findAll());
         model.addAttribute("projects", projectService.findAll());
         return "reports/add-report";
     }
 
+
     @PostMapping("/reports/add")
-    public String processCreationForm(@Valid Report report, BindingResult result) {
+    public String addReport(Report report, BindingResult result) {
         if (result.hasErrors()) {
             return "/reports/add-report";
-        } else {
-            reportService.save(report);
-            return "reports/list-reports";
         }
+
+        reportService.save(report);
+
+        return "redirect:/reports/" + report.getId() + "/show";
     }
 }

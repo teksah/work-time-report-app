@@ -16,6 +16,7 @@
             <div class="page-header mb-4">
                 <h3 class="text-left">Add New Report</h3>
             </div>
+            <!--/*@thymesVar id="report" type="se.miknel.worktimereportapp.model.Report"*/-->
             <form th:object="${report}" th:action="@{/reports/add}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
@@ -50,11 +51,11 @@
                                placeholder="Finish Time">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="rest">Rest</label>
-                        <select th:field="*{lunch}" id="rest" class="form-control">
-                            <option th:each="lunchValue : ${T(se.miknel.worktimereportapp.model.Lunch).values()}"
-                                    th:value="${lunchValue}"
-                                    th:text="${lunchValue.time} + ' h'">
+                        <label for="unitOfRest">Rest</label>
+                        <select th:field="*{unitOfRest}" id="unitOfRest" class="form-control">
+                            <option th:each="unit : ${units}"
+                                    th:value="${unit.id}"
+                                    th:utext="${unit.value} + ' h'">
                         </select>
                     </div>
                 </div>

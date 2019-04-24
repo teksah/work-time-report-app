@@ -1,6 +1,9 @@
 package se.miknel.worktimereportapp.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -21,8 +24,8 @@ public class Report extends BaseEntity{
 
     private LocalTime finishWork;
 
-    @Enumerated(value = EnumType.STRING)
-    private Lunch lunch;
+    @OneToOne
+    private UnitOfRest unitOfRest;
 
     private BigDecimal totalHours;
 
@@ -32,18 +35,18 @@ public class Report extends BaseEntity{
     public Report() {
     }
 
-    public Report(Worker worker, LocalDate workDate, Project project, LocalTime startWork, LocalTime finishWork, Lunch lunch, String description) {
+    public Report(Worker worker, LocalDate workDate, Project project, LocalTime startWork, LocalTime finishWork, UnitOfRest unitOfRest, String description) {
         this.worker = worker;
         this.workDate = workDate;
         this.project = project;
         this.startWork = startWork;
         this.finishWork = finishWork;
-        this.lunch = lunch;
+        this.unitOfRest = unitOfRest;
         this.description = description;
     }
 
     public BigDecimal calculateTotalHours() {
-            return this.totalHours = BigDecimal.valueOf(Duration.between(startWork, finishWork).toHours()).subtract(this.lunch.getTime());
+        return this.totalHours = BigDecimal.valueOf(Duration.between(startWork, finishWork).toHours()).subtract(this.unitOfRest.getValue());
     }
 
     public Worker getWorker() {
@@ -86,14 +89,6 @@ public class Report extends BaseEntity{
         this.finishWork = finishWork;
     }
 
-    public Lunch getLunch() {
-        return lunch;
-    }
-
-    public void setLunch(Lunch lunch) {
-        this.lunch = lunch;
-    }
-
     public BigDecimal getTotalHours() {
         return totalHours;
     }
@@ -108,5 +103,13 @@ public class Report extends BaseEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public UnitOfRest getUnitOfRest() {
+        return unitOfRest;
+    }
+
+    public void setUnitOfRest(UnitOfRest unitOfRest) {
+        this.unitOfRest = unitOfRest;
     }
 }

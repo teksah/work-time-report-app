@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import se.miknel.worktimereportapp.model.*;
 import se.miknel.worktimereportapp.services.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,16 +13,16 @@ import java.time.LocalTime;
 public class DataLoader implements CommandLineRunner {
     private final WorkerService workerService;
     private final CustomerService customerService;
-    private final AddressService addressService;
     private final ProjectService projectService;
     private final ReportService reportService;
+    private final UnitOfRestService unitOfRestService;
 
-    public DataLoader(WorkerService workerService, CustomerService customerService, AddressService addressService, ProjectService projectService, ReportService reportService) {
+    public DataLoader(WorkerService workerService, CustomerService customerService, ProjectService projectService, ReportService reportService, UnitOfRestService unitOfRestService) {
         this.workerService = workerService;
         this.customerService = customerService;
-        this.addressService = addressService;
         this.projectService = projectService;
         this.reportService = reportService;
+        this.unitOfRestService = unitOfRestService;
     }
 
     @Override
@@ -68,25 +69,25 @@ public class DataLoader implements CommandLineRunner {
         workerService.save(worker2);
         workerService.save(worker3);
 
-        Report report1 = new Report(worker1, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.NO_LUNCH, "rywning grund");
+        Report report1 = new Report(worker1, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "rywning grund");
         report1.calculateTotalHours();
 
-        Report report2 = new Report(worker2, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.HALF_TIME, "rywning grund");
+        Report report2 = new Report(worker2, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0.5)), "rywning grund");
         report2.calculateTotalHours();
 
-        Report report3 = new Report(worker3, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "kompletowanie");
+        Report report3 = new Report(worker3, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "kompletowanie");
         report3.calculateTotalHours();
 
-        Report report4 = new Report(worker1, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.NO_LUNCH, "spotkanie");
+        Report report4 = new Report(worker1, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "spotkanie");
         report4.calculateTotalHours();
 
-        Report report5 = new Report(worker2, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "spotkanie");
+        Report report5 = new Report(worker2, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
         report5.calculateTotalHours();
 
-        Report report6 = new Report(worker3, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "spotkanie");
+        Report report6 = new Report(worker3, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
         report6.calculateTotalHours();
 
-        Report report7 = new Report(worker1, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), Lunch.FULL_TIME, "grund");
+        Report report7 = new Report(worker1, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "grund");
         report7.calculateTotalHours();
 
 
