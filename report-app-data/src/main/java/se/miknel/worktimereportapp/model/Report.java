@@ -51,8 +51,8 @@ public class Report extends BaseEntity{
         this.description = description;
     }
 
-    public BigDecimal calculateTotalHours() {
-        return this.totalHours = BigDecimal.valueOf(Duration.between(startWork, finishWork).toHours()).subtract(this.unitOfRest.getValue());
+    public void calculateTotalHours() {
+        this.totalHours = BigDecimal.valueOf(Duration.between(startWork, finishWork).toHours()).subtract(this.unitOfRest.getValue());
     }
 
     public Worker getWorker() {
