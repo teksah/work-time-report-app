@@ -44,4 +44,10 @@ public class WorkerServiceImpl implements WorkerService{
     public void deleteById(Long aLong) {
         workerRepository.deleteById(aLong);
     }
+
+    @Override
+    public Worker findByFirstName(String firstName) {
+        return workerRepository.findByFirstName(firstName);
+    }
+
 }

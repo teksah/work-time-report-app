@@ -52,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
         projectService.save(project4);
 
         Worker worker1 = new Worker("Sebastian", "Bakowski");
-        Worker worker2 = new Worker("Sebastian", "Gaciarz");
+        Worker worker2 = new Worker("Sebastianek", "Gaciarz");
         Worker worker3 = new Worker("Mariusz", "Gaciarz");
 
         worker1.addProject(project1);

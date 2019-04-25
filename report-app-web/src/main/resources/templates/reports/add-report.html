@@ -22,7 +22,7 @@
                     <div class="form-group col-md-5">
                         <label for="dateWork">Work Date</label>
                         <input type="date" class="form-control" th:field="*{workDate}" id="dateWork"
-                               placeholder="Work Date">
+                               placeholder="Enter Work Date">
                     </div>
                     <div class="form-group col-md-5">
                         <label for="projectName">Project</label>
@@ -30,7 +30,7 @@
                             <option value="">Choose...</option>
                             <option th:each="project : ${projects}"
                                     th:value="${project.id}"
-                                    th:text="${project.projectName}">bl bla bla
+                                    th:text="${project.projectName}">
                             </option>
                         </select>
                     </div>
@@ -55,7 +55,7 @@
                         <select th:field="*{unitOfRest}" id="unitOfRest" class="form-control">
                             <option th:each="unit : ${units}"
                                     th:value="${unit.id}"
-                                    th:utext="${unit.value} + ' h'">
+                                    th:text="${unit.value} + ' h'">
                         </select>
                     </div>
                 </div>

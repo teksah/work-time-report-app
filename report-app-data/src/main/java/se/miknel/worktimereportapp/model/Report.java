@@ -1,5 +1,7 @@
 package se.miknel.worktimereportapp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -15,13 +17,16 @@ public class Report extends BaseEntity{
     @ManyToOne
     private Worker worker;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate workDate;
 
     @ManyToOne
     private Project project;
 
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startWork;
 
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime finishWork;
 
     @OneToOne
@@ -33,6 +38,7 @@ public class Report extends BaseEntity{
     private String description;
 
     public Report() {
+        this.workDate = LocalDate.now();
     }
 
     public Report(Worker worker, LocalDate workDate, Project project, LocalTime startWork, LocalTime finishWork, UnitOfRest unitOfRest, String description) {

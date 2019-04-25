@@ -12,6 +12,7 @@ import se.miknel.worktimereportapp.model.Report;
 import se.miknel.worktimereportapp.services.ProjectService;
 import se.miknel.worktimereportapp.services.ReportService;
 import se.miknel.worktimereportapp.services.UnitOfRestService;
+import se.miknel.worktimereportapp.services.WorkerService;
 
 import java.util.Set;
 
@@ -20,11 +21,13 @@ public class ReportController {
     private final ReportService reportService;
     private final ProjectService projectService;
     private final UnitOfRestService unitOfRestService;
+    private final WorkerService workerService;
 
-    public ReportController(ReportService reportService, ProjectService projectService, UnitOfRestService unitOfRestService) {
+    public ReportController(ReportService reportService, ProjectService projectService, UnitOfRestService unitOfRestService, WorkerService workerService) {
         this.reportService = reportService;
         this.projectService = projectService;
         this.unitOfRestService = unitOfRestService;
+        this.workerService = workerService;
     }
 
     @RequestMapping("/reports")
@@ -57,13 +60,14 @@ public class ReportController {
         return "reports/add-report";
     }
 
-
     @PostMapping("/reports/add")
     public String addReport(Report report, BindingResult result) {
         if (result.hasErrors()) {
             return "/reports/add-report";
         }
 
+        report.setWorker(workerService.findByFirstName("Sebastian"));
+        report.calculateTotalHours();
         reportService.save(report);
 
         return "redirect:/reports/" + report.getId() + "/show";
