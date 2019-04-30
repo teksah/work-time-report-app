@@ -38,6 +38,8 @@ public class Report extends BaseEntity{
     private String description;
 
     public Report() {
+        this.startWork = LocalTime.of(7, 0);
+        this.finishWork = LocalTime.of(16, 0);
         this.workDate = LocalDate.now();
     }
 

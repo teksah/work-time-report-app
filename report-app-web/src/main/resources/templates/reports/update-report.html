@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Reports - Add New Report</title>
+    <title>Reports - Edit Report</title>
 
     <div th:replace="fragments/header :: header-css"></div>
 
@@ -14,10 +14,10 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="page-header mb-4">
-                <h3 class="text-left">Add New Report</h3>
+                <h3 class="text-left">Edit Report</h3>
             </div>
             <!--/*@thymesVar id="report" type="se.miknel.worktimereportapp.model.Report"*/-->
-            <form th:object="${report}" th:action="@{/reports/add}" method="post">
+            <form th:object="${report}" th:action="@{/reports/{id}/update/(id=${report.id})}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="dateWork">Work Date</label>

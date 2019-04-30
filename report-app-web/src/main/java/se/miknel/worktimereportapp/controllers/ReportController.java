@@ -72,4 +72,13 @@ public class ReportController {
 
         return "redirect:/reports/" + report.getId() + "/show";
     }
+
+    @GetMapping("/reports/{reportId}/edit")
+    public String editReport(@PathVariable("reportId") Long reportId, Model model) {
+        model.addAttribute("units", unitOfRestService.findAll());
+        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("report", reportService.findById(reportId));
+
+        return "reports/update-report";
+    }
 }
