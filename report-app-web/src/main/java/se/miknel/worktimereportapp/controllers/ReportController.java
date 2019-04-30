@@ -81,4 +81,17 @@ public class ReportController {
 
         return "reports/update-report";
     }
+
+    @PostMapping("/reports/{reportId}/update")
+    public String updateReport(@PathVariable("reportId") Long reportId, Report report, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "reports/update-report";
+        }
+
+        report.setId(reportId);
+        report.setWorker(reportService.findById(reportId).getWorker());
+        report.calculateTotalHours();
+        reportService.save(report);
+        return "redirect:/reports/" + report.getId() + "/show";
+    }
 }
