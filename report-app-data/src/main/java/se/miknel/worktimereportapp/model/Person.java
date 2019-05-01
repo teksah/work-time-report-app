@@ -1,9 +1,15 @@
 package se.miknel.worktimereportapp.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotEmpty;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
 @MappedSuperclass
 public class Person extends BaseEntity{
 
@@ -12,32 +18,13 @@ public class Person extends BaseEntity{
     @NotEmpty
     private String lastName;
 
-    public Person() {
-    }
-
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     @Override
     public String toString() {
-        return this.firstName + " "+ this.lastName;
+        return firstName + " " + lastName;
     }
 }

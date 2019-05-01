@@ -17,7 +17,7 @@
                 <h3 class="text-left">Edit Report</h3>
             </div>
             <!--/*@thymesVar id="report" type="se.miknel.worktimereportapp.model.Report"*/-->
-            <form th:object="${report}" th:action="@{/reports/{id}/update/(id=${report.id})}" method="post">
+            <form th:object="${report}" th:action="@{/reports/{id}/update(id=${report.id})}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="dateWork">Work Date</label>
@@ -105,7 +105,7 @@
                     <label for="description">Work Description</label>
                     <textarea class="form-control" th:field="*{description}" id="description" rows="3"></textarea>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Add Report"/>
+                <input type="submit" class="btn btn-primary" value="Update Report"/>
 
             </form>
         </div>

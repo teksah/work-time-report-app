@@ -1,12 +1,18 @@
 package se.miknel.worktimereportapp.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Customer extends Person {
 
@@ -19,10 +25,7 @@ public class Customer extends Person {
     private String email;
 
     @OneToMany(mappedBy = "customer")
-    private List<Project> projects = new ArrayList<>();;
-
-    public Customer() {
-    }
+    private List<Project> projects = new ArrayList<>();
 
     public Customer(String firstName, String lastName, String telephoneNumber, String email) {
         super(firstName, lastName);
@@ -38,53 +41,4 @@ public class Customer extends Person {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        if (this.company) {
-            return this.companyName;
-        } else {
-            return super.toString();
-        }
-
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public boolean isCompany() {
-        return company;
-    }
-
-    public void setCompany(boolean company) {
-        this.company = company;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
 }

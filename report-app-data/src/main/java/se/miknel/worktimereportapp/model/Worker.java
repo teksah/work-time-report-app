@@ -1,11 +1,18 @@
 package se.miknel.worktimereportapp.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Worker extends Person {
 
@@ -18,10 +25,6 @@ public class Worker extends Person {
             inverseJoinColumns = { @JoinColumn(name = "project_id")})
     private Set<Project> projects = new HashSet<>();
 
-    public Worker() {
-
-    }
-
     public Worker(String firstName, String lastName) {
         super(firstName, lastName);
     }
@@ -31,19 +34,8 @@ public class Worker extends Person {
         project.getWorkers().add(this);
     }
 
-    public List<Report> getReports() {
-        return reports;
-    }
-
-    public void setReports(List<Report> reports) {
-        this.reports = reports;
-    }
-
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
