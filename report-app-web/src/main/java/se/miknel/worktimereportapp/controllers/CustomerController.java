@@ -47,11 +47,11 @@ public class CustomerController {
     public String addCustomer(@Valid Customer customer, BindingResult result) {
 
         if (existByEmail(customer)) {
-            result.rejectValue("email", "error.email", "This email is already exist");
+            result.rejectValue("email", "error.email", "");
         }
 
         if (existByPhoneNumber(customer)) {
-            result.rejectValue("telephoneNumber", "error.telephoneNumber", "This number already exist");
+            result.rejectValue("telephoneNumber", "error.telephone_number", "");
         }
 
         if (result.hasErrors()) {
@@ -86,7 +86,7 @@ public class CustomerController {
         }
 
         if (!(customerService.findById(customerId).getTelephoneNumber().equals(customer.getTelephoneNumber())) && (existByPhoneNumber(customer))) {
-            result.rejectValue("telephoneNumber", "error.telephoneNumber", "This number already exist");
+            result.rejectValue("telephoneNumber", "error.telephone_number", "This number already exist");
         }
 
         customer.setId(customerId);

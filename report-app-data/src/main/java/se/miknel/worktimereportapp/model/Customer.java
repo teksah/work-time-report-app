@@ -18,11 +18,12 @@ import java.util.List;
 @Entity
 public class Customer extends Person {
 
-    @Pattern(regexp = "^[0-9]{10}$", message = "Wrong number format")
+    @NotEmpty
+    @Pattern(regexp = "^$|[0-9]{10}$")
     private String telephoneNumber;
 
-    @Email
     @NotEmpty
+    @Email
     private String email;
 
     @OneToMany(mappedBy = "customer")
