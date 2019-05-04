@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <button th:with="text=${customer['new']} ? #{customers.add.button} : #{customers.update.button}"
+                <button th:with="text=${customer['new']} ? #{button.add} : #{button.update}"
                         class="btn btn-primary" type="submit" th:text="${text}"></button>
             </form>
         </div>

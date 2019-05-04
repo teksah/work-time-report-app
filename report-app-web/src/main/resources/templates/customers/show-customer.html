@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Customer - ' + ${customer}"></title>
+    <title th:text="#{customers.customer(${customer})}"></title>
     <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body>
@@ -12,53 +12,56 @@
         <div class="col-md-8">
             <div class="row mb-4">
                 <div class="page-header col-md-6">
-                    <h3 class="text-left">Customer Information</h3>
+                    <h3 class="text-left" th:text="#{customers.customer_information}"></h3>
                 </div>
                 <div class="col-md-6 text-right mt-auto">
-                    <a class="btn btn-labeled btn-primary" th:href="@{/customers/__${customer.id}__/edit}" role="button">
-                        <span class="btn-label"><i class="far fa-edit"></i></span>Edit
+                    <a class="btn btn-labeled btn-primary"
+                       th:href="@{/customers/__${customer.id}__/edit}" role="button">
+                        <span class="btn-label"><i class="far fa-edit"></i></span>
+                        <span th:text="#{button.update}"></span>
                     </a>
                     <a class="btn btn-labeled btn-primary" th:href="@{/customers/__${customer.id}__/remove}" role="button">
-                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>Remove
+                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>
+                        <span th:text="#{button.remove}"></span>
                     </a>
                 </div>
             </div>
             <table class="table table-striped mb-5" th:object="${customer}">
                     <tr>
-                        <th>First Name</th>
+                        <th th:text="#{theaders.first_name}"></th>
                         <td th:text="*{firstName}"></td>
                     </tr>
                     <tr>
-                        <th>Last Name</th>
+                        <th th:text="#{theaders.last_name}"></th>
                         <td th:text="*{lastName}"></td>
                     </tr>
                     <tr>
-                        <th>Telephone</th>
+                        <th th:text="#{theaders.telephone_number}"></th>
                         <td th:text="*{telephoneNumber}"></td>
                     </tr>
                     <tr>
-                        <th>Email</th>
+                        <th th:text="#{theaders.email}"></th>
                         <td th:text="*{email}"></td>
                     </tr>
                 </table>
 
             <div class="row mb-2">
                 <div class="page-header col-md-6">
-                    <h3 class="text-left">Projects</h3>
+                    <h3 class="text-left" th:text="#{projects.title}"></h3>
                 </div>
             </div>
             <table class="table table-hover table-sm">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Project Name</th>
-                    <th>Address</th>
+                    <th th:text="#{projects.project_name}"></th>
+                    <th th:text="#{projects.address}"></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:if="${#lists.isEmpty(customer.projects)}">
-                    <td colspan="4" class="text-center"> No Projects Available </td>
+                    <td colspan="4" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                 </tr>
                 <tr th:each="project : ${customer.projects}">
                     <td th:text="${project.id}"></td>
@@ -67,9 +70,14 @@
                     </td>
                     <td th:text="${project.address}"></td>
                     <td class="action-links">
-                        <a th:href="@{/projects/__${project.id}__/show}" class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                        <a th:href="@{/projects/__${project.id}__/edit}"class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                        <a th:href="@{/projects/__${project.id}__/remove}"class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                        <a th:href="@{/projects/__${project.id}__/show}" class="action-links"
+                           th:title="#{tooltips.show}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/projects/__${project.id}__/edit}" class="action-links"
+                           th:title="#{tooltips.edit}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="far fa-edit"></i></a>
+                        <a th:href="@{/projects/__${project.id}__/remove}" class="action-links"
+                           th:title="#{tooltips.delete}" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>
