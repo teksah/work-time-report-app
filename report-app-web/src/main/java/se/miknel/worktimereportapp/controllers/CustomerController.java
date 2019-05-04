@@ -1,10 +1,11 @@
 package se.miknel.worktimereportapp.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import se.miknel.worktimereportapp.model.Customer;
@@ -13,6 +14,7 @@ import se.miknel.worktimereportapp.services.ProjectService;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class CustomerController {
 
@@ -38,34 +40,60 @@ public class CustomerController {
 
     @GetMapping("/customers/new")
     public String showAddForm(Customer customer) {
-        return "customers/add-customer";
+        return "/customers/add-update-customer";
     }
 
-    @PostMapping("/customers/add")
+    @PostMapping("/customers/new")
     public String addCustomer(@Valid Customer customer, BindingResult result) {
-        if (result.hasErrors()) {
-            return "customers/add-customer";
+
+        if (existByEmail(customer)) {
+            result.rejectValue("email", "error.email", "This email is already exist");
         }
+
+        if (existByPhoneNumber(customer)) {
+            result.rejectValue("telephoneNumber", "error.telephoneNumber", "This number already exist");
+        }
+
+        if (result.hasErrors()) {
+            return "/customers/add-update-customer";
+        }
+
+
         customerService.save(customer);
 
         return "redirect:/customers/"+customer.getId()+"/show";
     }
 
-    @GetMapping("/customers/{customerId}/edit")
-    public String showUpdateForm(@PathVariable("customerId") Long customerId, Model model) {
-
-        model.addAttribute("customer", customerService.findById(customerId));
-
-        return "customers/update-customer";
+    private boolean existByPhoneNumber(@Valid Customer customer) {
+        return customerService.existsByTelephoneNumber(customer.getTelephoneNumber());
     }
 
-    @PostMapping("/customers/{customerId}/update")
-    public String updateCustomer(@PathVariable("customerId") Long customerId, Customer customer, BindingResult result) {
-        if (result.hasErrors()) {
-            return "customers/update-customer";
+    private boolean existByEmail(@Valid Customer customer) {
+        return customerService.existsByEmail(customer.getEmail());
+    }
+
+    @GetMapping("/customers/{customerId}/edit")
+    public String showUpdateForm(@PathVariable("customerId") Long customerId, Model model) {
+        model.addAttribute("customer", customerService.findById(customerId));
+        return "customers/add-update-customer";
+    }
+
+    @PostMapping("/customers/{customerId}/edit")
+    public String updateCustomer(@PathVariable("customerId") Long customerId, @Validated Customer customer, BindingResult result, Model model) {
+
+        if (!(customerService.findById(customerId).getEmail().equals(customer.getEmail())) && (existByEmail(customer))) {
+            result.rejectValue("email", "error.email", "This email is already exist");
+        }
+
+        if (!(customerService.findById(customerId).getTelephoneNumber().equals(customer.getTelephoneNumber())) && (existByPhoneNumber(customer))) {
+            result.rejectValue("telephoneNumber", "error.telephoneNumber", "This number already exist");
         }
 
         customer.setId(customerId);
+        if (result.hasErrors()) {
+            return "customers/add-update-customer";
+        }
+
         customerService.save(customer);
 
         return "redirect:/customers/" + customer.getId() + "/show";

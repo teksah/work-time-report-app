@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +18,10 @@ import java.util.List;
 @Entity
 public class Customer extends Person {
 
-    @NotEmpty
+    @Pattern(regexp = "^[0-9]{10}$", message = "Wrong number format")
     private String telephoneNumber;
-    private String companyName;
 
-    private boolean company;
+    @Email
     @NotEmpty
     private String email;
 
@@ -33,12 +34,8 @@ public class Customer extends Person {
         this.email = email;
     }
 
-    public Customer(String firstName, String lastName, String telephoneNumber, String companyName, boolean company, String email) {
-        super(firstName, lastName);
-        this.telephoneNumber = telephoneNumber;
-        this.companyName = companyName;
-        this.company = company;
-        this.email = email;
+    @Override
+    public String toString() {
+        return super.toString();
     }
-
 }

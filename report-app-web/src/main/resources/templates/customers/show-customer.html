@@ -24,10 +24,6 @@
                 </div>
             </div>
             <table class="table table-striped mb-5" th:object="${customer}">
-                    <tr th:if="*{company == true}">
-                        <th>Company Name</th>
-                        <td th:text="*{companyName}"></td>
-                    </tr>
                     <tr>
                         <th>First Name</th>
                         <td th:text="*{firstName}"></td>

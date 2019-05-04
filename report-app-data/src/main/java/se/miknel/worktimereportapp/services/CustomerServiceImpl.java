@@ -33,11 +33,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer save(Customer object) {
-
-        if (!object.isCompany()) {
-            object.setCompanyName(null);
-        }
-
         return customerRepository.save(object);
     }
 
@@ -51,5 +46,15 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.deleteById(aLong);
     }
 
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return customerRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByTelephoneNumber(String number) {
+        return customerRepository.existsByTelephoneNumber(number);
+    }
 
 }
