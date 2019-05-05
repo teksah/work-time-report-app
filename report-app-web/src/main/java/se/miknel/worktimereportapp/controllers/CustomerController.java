@@ -82,11 +82,11 @@ public class CustomerController {
     public String updateCustomer(@PathVariable("customerId") Long customerId, @Validated Customer customer, BindingResult result, Model model) {
 
         if (!(customerService.findById(customerId).getEmail().equals(customer.getEmail())) && (existByEmail(customer))) {
-            result.rejectValue("email", "error.email", "This email is already exist");
+            result.rejectValue("email", "error.email", "");
         }
 
         if (!(customerService.findById(customerId).getTelephoneNumber().equals(customer.getTelephoneNumber())) && (existByPhoneNumber(customer))) {
-            result.rejectValue("telephoneNumber", "error.telephone_number", "This number already exist");
+            result.rejectValue("telephoneNumber", "error.telephone_number", "");
         }
 
         customer.setId(customerId);
