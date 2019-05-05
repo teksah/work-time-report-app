@@ -55,6 +55,11 @@
             <artifactId>momentjs</artifactId>
             <version>2.24.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>flag-icon-css</artifactId>
+            <version>3.3.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

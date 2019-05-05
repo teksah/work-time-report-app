@@ -6,8 +6,11 @@
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.css}"/>
         <link rel="stylesheet" th:href="@{/css/custom.css}"/>
+        <link rel="stylesheet" th:href="@{/css/sticky-footer.css}"/>
         <link rel="stylesheet"
               th:href="@{/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css}"/>
+        <link rel="stylesheet" th:href="@{/webjars/flag-icon-css/3.3.0/css/flag-icon.min.css}">
+        <!-- Custom styles for this template -->
 
 
         <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.slim.min.js}"></script>
@@ -56,11 +59,32 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/customers/}">Customers</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Language
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown09">
+                                <a class="dropdown-item" th:href="@{?lang=pl}"><span
+                                        class="flag-icon flag-icon-pl"> </span> Polski</a>
+                                <a class="dropdown-item" th:href="@{?lang=en}"><span
+                                        class="flag-icon flag-icon-us"> </span> English</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
+</div>
+<div th:fragment="footer">
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">
+                &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span> - MIKNEL Installation och Service
+            </span>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
