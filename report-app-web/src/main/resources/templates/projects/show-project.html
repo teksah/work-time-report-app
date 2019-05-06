@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title th:text="'Project - ' + ${project.projectName}"></title>
-    <div th:replace="fragments/header :: header-css"></div>
+    <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 <body>
 <div class="container-fluid mt-4">
-    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/common :: menu-navbar"></div>
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="row mb-4">
@@ -79,6 +78,7 @@
             </table>
         </div>
     </div>
+    <div th:replace="fragments/common :: footer"></div>
 </div>
 </body>
 </html>
