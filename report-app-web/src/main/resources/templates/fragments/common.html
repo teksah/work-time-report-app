@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="header-css-script">
     <meta charset="UTF-8">
-    <div th:fragment="header-css">
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.css}"/>
         <link rel="stylesheet" th:href="@{/css/custom.css}"/>
@@ -10,7 +9,6 @@
         <link rel="stylesheet"
               th:href="@{/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/flag-icon-css/3.3.0/css/flag-icon.min.css}">
-        <!-- Custom styles for this template -->
 
 
         <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.slim.min.js}"></script>
@@ -30,15 +28,11 @@
                 $('li.active').removeClass('active');
                 $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
             });
-
         </script>
-
-
-    </div>
 </head>
 
 <body>
-<div th:fragment="header">
+<div th:fragment="menu-navbar">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 24px">
@@ -50,25 +44,26 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/reports/}">Reports <span
+                            <a class="nav-link" th:href="@{/reports/}"><span th:text="#{navbar.reports}"></span><span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/projects/}">Projects</a>
+                            <a class="nav-link" th:href="@{/projects/}"><span th:text="#{navbar.projects}"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/customers/}">Customers</a>
+                            <a class="nav-link" th:href="@{/customers/}"><span th:text="#{navbar.customers}"></span></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Language
-                            </a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span th:text="#{navbar.language.name}"></span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown09">
                                 <a class="dropdown-item" th:href="@{?lang=pl}"><span
-                                        class="flag-icon flag-icon-pl"> </span> Polski</a>
+                                        class="flag-icon flag-icon-pl"> </span> <span
+                                        th:text="#{navbar.language.polish}"></span></a>
                                 <a class="dropdown-item" th:href="@{?lang=en}"><span
-                                        class="flag-icon flag-icon-us"> </span> English</a>
+                                        class="flag-icon flag-icon-us"> </span> <span
+                                        th:text="#{navbar.language.english}"></span></a>
                             </div>
                         </li>
                     </ul>
@@ -79,9 +74,11 @@
 </div>
 <div th:fragment="footer">
     <footer class="footer">
-        <div class="container">
+        <div class="container text-center">
             <span class="text-muted">
-                &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span> - MIKNEL Installation och Service
+                &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span>
+                - MIKNEL Installation och Service -
+                <span th:text="#{footer.today(${#calendars.format(#calendars.createNow(), 'dd MMM yyyy')})}"></span>
             </span>
         </div>
     </footer>
