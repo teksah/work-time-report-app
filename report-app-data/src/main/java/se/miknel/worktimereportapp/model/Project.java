@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,12 +19,15 @@ import java.util.Set;
 @Entity
 public class Project extends BaseEntity{
 
+    @NotEmpty
     private String projectName;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @Valid
     private Address address;
 
     @ManyToOne
+    @NotNull
     private Customer customer;
 
     @ManyToMany(mappedBy = "projects")

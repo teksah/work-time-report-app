@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
@@ -13,8 +15,12 @@ import javax.persistence.OneToOne;
 @Entity
 public class Address extends BaseEntity{
 
+    @NotEmpty
     private String streetName;
+    @Pattern(regexp = "^(\\d{5})?$")
+    @NotEmpty
     private String zipCode;
+    @NotEmpty
     private String city;
 
     @OneToOne(mappedBy = "address")

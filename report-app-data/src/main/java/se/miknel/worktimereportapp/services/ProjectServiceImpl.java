@@ -44,4 +44,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteById(Long aLong) {
         projectRepository.deleteById(aLong);
     }
+
+    @Override
+    public boolean existsByAddress_StreetName(String address) {
+        return projectRepository.existsByAddress_StreetName(address);
+    }
+
+    @Override
+    public boolean existsByProjectName(String name) {
+        return projectRepository.existsByProjectName(name);
+    }
 }

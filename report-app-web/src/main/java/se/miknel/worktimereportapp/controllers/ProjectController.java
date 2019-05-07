@@ -10,34 +10,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.services.CustomerService;
 import se.miknel.worktimereportapp.services.ProjectService;
+import se.miknel.worktimereportapp.services.ReportService;
+
+import javax.validation.Valid;
 
 @Controller
 public class ProjectController {
 
     private final CustomerService customerService;
     private final ProjectService projectService;
+    private final ReportService reportService;
 
-    public ProjectController(CustomerService customerService, ProjectService projectService) {
+    public ProjectController(CustomerService customerService, ProjectService projectService, ReportService reportService) {
         this.customerService = customerService;
         this.projectService = projectService;
+        this.reportService = reportService;
     }
 
     @GetMapping("/projects/new")
     public String showAddForm(Project project, Model model) {
         model.addAttribute("customers", customerService.findAll());
-        return "projects/add-project";
+        return "projects/add-update-project";
     }
 
-    @PostMapping("/projects/add")
-    public String addProject(Project project, BindingResult result) {
+    @PostMapping("/projects/new")
+    public String addProject(@Valid Project project, BindingResult result, Model model) {
+
+        if (existByAddress(project)) {
+            result.rejectValue("address.streetName", "error.address.streetName");
+        }
+
+        if (existByProjectName(project)) {
+            result.rejectValue("projectName", "error.projectName");
+        }
+
         if (result.hasErrors()) {
-            return "projects/add-project";
+            model.addAttribute("customers", customerService.findAll());
+            return "projects/add-update-project";
         }
 
         projectService.save(project);
 
-        return "redirect:/projects/"+project.getId()+"/show";
+        return "redirect:/projects/" + project.getId() + "/show";
 
+    }
+
+    private boolean existByProjectName(@Valid Project project) {
+        return projectService.existsByProjectName(project.getProjectName());
+    }
+
+    private boolean existByAddress(@Valid Project project) {
+        return projectService.existsByAddress_StreetName(project.getAddress().getStreetName());
     }
 
     @RequestMapping("/projects")
@@ -50,6 +73,7 @@ public class ProjectController {
     @GetMapping("/projects/{projectId}/show")
     public String showProject(@PathVariable("projectId") Long projectId, Model model) {
         model.addAttribute("project", projectService.findById(projectId));
+        model.addAttribute("reports", reportService.findAll());
 
         return "projects/show-project";
     }
@@ -58,17 +82,26 @@ public class ProjectController {
     public String editProject(@PathVariable("projectId") Long projectId, Model model) {
         model.addAttribute("project", projectService.findById(projectId));
         model.addAttribute("customers", customerService.findAll());
-
-        return "projects/update-project";
+        return "projects/add-update-project";
     }
 
-    @PostMapping("/projects/{projectId}/update")
-    public String updateCustomer(@PathVariable("projectId") Long projectId, Project project, BindingResult result) {
-        if (result.hasErrors()) {
-            return "projects/update-project";
+    @PostMapping("/projects/{projectId}/edit")
+    public String updateCustomer(@PathVariable("projectId") Long projectId, @Valid Project project, BindingResult result, Model model) {
+
+        if (!(projectService.findById(projectId).getAddress().getStreetName().equals(project.getAddress().getStreetName())) && (existByAddress(project))) {
+            result.rejectValue("address.streetName", "error.address.streetName", "");
+        }
+
+        if (!(projectService.findById(projectId).getProjectName().equals(project.getProjectName())) && (existByProjectName(project))) {
+            result.rejectValue("projectName", "error.projectName", "");
         }
 
         project.setId(projectId);
+        if (result.hasErrors()) {
+            model.addAttribute("customers", customerService.findAll());
+            return "projects/add-update-project";
+        }
+
         projectService.save(project);
 
         return "redirect:/projects/" + project.getId() + "/show";

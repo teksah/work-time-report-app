@@ -36,10 +36,10 @@ public class DataLoader implements CommandLineRunner {
         customerService.save(customer2);
         customerService.save(customer3);
 
-        Address address1 = new Address("Centrum 12", "123-45", "Stockholm");
-        Address address2 = new Address("Alvsio 6", "111-22", "Alvsio");
-        Address address3 = new Address("Huddinge 34", "555-55", "Huddinge");
-        Address address4 = new Address("Lidingovagen 69", "686-69", "Lidingo");
+        Address address1 = new Address("Centrum 12", "12345", "Stockholm");
+        Address address2 = new Address("Alvsio 6", "11122", "Alvsio");
+        Address address3 = new Address("Huddinge 34", "55555", "Huddinge");
+        Address address4 = new Address("Lidingovagen 69", "68669", "Lidingo");
 
         Project project1 = new Project("Mieszkanie Centrum", address1, customer1);
         Project project2 = new Project("Block Alvsio", address2, customer1);

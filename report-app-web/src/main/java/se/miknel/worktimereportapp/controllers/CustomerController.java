@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +39,7 @@ public class CustomerController {
 
     @GetMapping("/customers/new")
     public String showAddForm(Customer customer) {
-        return "/customers/add-update-customer";
+        return "customers/add-update-customer";
     }
 
     @PostMapping("/customers/new")
@@ -55,7 +54,7 @@ public class CustomerController {
         }
 
         if (result.hasErrors()) {
-            return "/customers/add-update-customer";
+            return "customers/add-update-customer";
         }
 
 
@@ -79,7 +78,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/{customerId}/edit")
-    public String updateCustomer(@PathVariable("customerId") Long customerId, @Validated Customer customer, BindingResult result, Model model) {
+    public String updateCustomer(@PathVariable("customerId") Long customerId, @Valid Customer customer, BindingResult result, Model model) {
 
         if (!(customerService.findById(customerId).getEmail().equals(customer.getEmail())) && (existByEmail(customer))) {
             result.rejectValue("email", "error.email", "");

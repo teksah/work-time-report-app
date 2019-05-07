@@ -3,7 +3,6 @@
 <head>
     <title th:with="text=${customer['new']} ? #{customers.add} : #{customers.update.customer(${customer})}"
            th:text="${text}"></title>
-    <
     <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 <body>
