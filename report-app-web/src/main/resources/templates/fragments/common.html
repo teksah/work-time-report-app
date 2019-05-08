@@ -2,33 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header-css-script">
     <meta charset="UTF-8">
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.css}"/>
-        <link rel="stylesheet" th:href="@{/css/custom.css}"/>
-        <link rel="stylesheet" th:href="@{/css/sticky-footer.css}"/>
-        <link rel="stylesheet"
-              th:href="@{/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css}"/>
-        <link rel="stylesheet" th:href="@{/webjars/flag-icon-css/3.3.0/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sticky-footer.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/flag-icon-css/3.3.0/css/flag-icon.min.css}">
 
 
-        <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.slim.min.js}"></script>
-        <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
-        <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-        <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{/webjars/momentjs/2.24.0/min/moment.min.js}"></script>
-        <script type="text/javascript"
-                th:src="@{/webjars/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.slim.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/momentjs/2.24.0/min/moment.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/webjars/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js}"></script>
 
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            })
             });
 
             $(document).ready(function () {
                 $('li.active').removeClass('active');
                 $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
             });
-        </script>
+    </script>
 </head>
 
 <body>

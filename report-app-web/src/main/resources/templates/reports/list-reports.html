@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Reports - List</title>
+    <title th:text="#{reports.title}"></title>
     <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 
@@ -12,11 +12,12 @@
         <div class="col-md-10">
             <div class="row mb-4">
                 <div class="page-header col-md-10">
-                    <h3 class="text-left">Reports</h3>
+                    <h3 class="text-left" th:text="#{reports.title}"></h3>
                 </div>
                 <div class="col-md-2 text-right mt-auto">
                     <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
-                        <span class="btn-label"><i class="fas fa-plus"></i></span>Add Report
+                        <span class="btn-label"><i class="fas fa-plus"></i></span>
+                        <span th:text="#{reports.add}"></span>
                     </a>
                 </div>
             </div>
@@ -24,13 +25,13 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Date</th>
-                    <th>Project</th>
-                    <th>Worker</th>
-                    <th>Period</th>
-                    <th>Rest</th>
-                    <th>Total</th>
-                    <th>Description</th>
+                    <th th:text="#{reports.date}"></th>
+                    <th th:text="#{reports.project}"></th>
+                    <th th:text="#{reports.worker}"></th>
+                    <th th:text="#{reports.period}"></th>
+                    <th th:text="#{reports.rest}"></th>
+                    <th th:text="#{reports.total}"></th>
+                    <th th:text="#{reports.description}"></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -47,9 +48,14 @@
                     <td th:text="${report.totalHours}"></td>
                     <td th:text="${report.description}"></td>
                     <td class="action-links">
-                        <a th:href="@{/reports/__${report.id}__/show}"class="action-links" title="View" data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                        <a th:href="@{/reports/__${report.id}__/edit}"class="action-links" title="Edit" data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                        <a th:href="@{/reports/__${report.id}__/remove}"class="action-links" title="Delete" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/show}" class="action-links"
+                           th:title="#{tooltips.show}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/edit}" class="action-links"
+                           th:title="#{tooltips.edit}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="far fa-edit"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/remove}" class="action-links"
+                           th:title="#{tooltips.delete}" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>

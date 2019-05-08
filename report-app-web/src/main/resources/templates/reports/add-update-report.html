@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Reports - Add New Report</title>
+    <title>Reports - Add Report</title>
     <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 <body>
@@ -12,8 +12,25 @@
             <div class="page-header mb-4">
                 <h3 class="text-left">Add New Report</h3>
             </div>
-            <!--/*@thymesVar id="report" type="se.miknel.worktimereportapp.model.Report"*/-->
-            <form th:object="${report}" th:action="@{/reports/add}" method="post">
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker3').datetimepicker({
+                        format: 'HH:mm'
+                    });
+                });
+                $(function () {
+                    $('#datetimepicker4').datetimepicker({
+                        format: 'YYYY-MM-DD'
+                    });
+                });
+
+                $(function () {
+                    $('#datetimepicker5').datetimepicker({
+                        format: 'HH:mm'
+                    });
+                });
+            </script>
+            <form th:object="${report}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="dateWork">Work Date</label>
@@ -33,8 +50,7 @@
                             <option value="">Choose...</option>
                             <option th:each="project : ${projects}"
                                     th:value="${project.id}"
-                                    th:text="${project.projectName}"
-                                    placeholder="Choose...">
+                                    th:text="${project.projectName}">
                             </option>
                         </select>
                     </div>
@@ -66,28 +82,8 @@
                             <div class="input-group-append" data-target="#datetimepicker5" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-clock"></i></div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker3').datetimepicker({
-                                        format: 'HH:mm'
-                                    });
-                                });
-                                $(function () {
-                                    $('#datetimepicker4').datetimepicker({
-                                        format: 'YYYY-MM-DD'
-                                    });
-                                });
-
-                                $(function () {
-                                    $('#datetimepicker5').datetimepicker({
-                                        format: 'HH:mm'
-                                    });
-                                });
-                            </script>
                         </div>
                     </div>
-
-
                     <div class="form-group col-md-4">
                         <label for="unitOfRest">Rest</label>
                         <select th:field="*{unitOfRest}" id="unitOfRest" class="form-control">
@@ -102,7 +98,6 @@
                     <textarea class="form-control" th:field="*{description}" id="description" rows="3"></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Add Report"/>
-
             </form>
         </div>
     </div>

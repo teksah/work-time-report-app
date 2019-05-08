@@ -14,6 +14,7 @@ import se.miknel.worktimereportapp.services.ReportService;
 import se.miknel.worktimereportapp.services.UnitOfRestService;
 import se.miknel.worktimereportapp.services.WorkerService;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 @Controller
@@ -33,7 +34,6 @@ public class ReportController {
     @RequestMapping("/reports")
     public String showAllReports(Model model) {
         model.addAttribute("reports", reportService.findAll());
-
         return "reports/list-reports";
     }
 
@@ -57,13 +57,15 @@ public class ReportController {
     public String showAddForm(Report report, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
         model.addAttribute("projects", projectService.findAll());
-        return "reports/add-report";
+        return "reports/add-update-report";
     }
 
-    @PostMapping("/reports/add")
-    public String addReport(Report report, BindingResult result) {
+    @PostMapping("/reports/new")
+    public String addReport(@Valid Report report, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "/reports/add-report";
+            model.addAttribute("units", unitOfRestService.findAll());
+            model.addAttribute("projects", projectService.findAll());
+            return "reports/add-update-report";
         }
 
         report.setWorker(workerService.findByFirstName("Sebastian"));
@@ -79,13 +81,14 @@ public class ReportController {
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("report", reportService.findById(reportId));
 
-        return "reports/update-report";
+        return "reports/add-update-report";
     }
 
-    @PostMapping("/reports/{reportId}/update")
+    @PostMapping("/reports/{reportId}/edit")
     public String updateReport(@PathVariable("reportId") Long reportId, Report report, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
-            return "reports/update-report";
+            return "reports/add-update-report";
         }
 
         report.setId(reportId);
