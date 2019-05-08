@@ -1,5 +1,6 @@
 package se.miknel.worktimereportapp.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
+import se.miknel.worktimereportapp.model.Worker;
 import se.miknel.worktimereportapp.services.ProjectService;
 import se.miknel.worktimereportapp.services.ReportService;
 import se.miknel.worktimereportapp.services.UnitOfRestService;
@@ -17,6 +19,7 @@ import se.miknel.worktimereportapp.services.WorkerService;
 import javax.validation.Valid;
 import java.util.Set;
 
+@Slf4j
 @Controller
 public class ReportController {
     private final ReportService reportService;
@@ -68,8 +71,12 @@ public class ReportController {
             return "reports/add-update-report";
         }
 
-        report.setWorker(workerService.findByFirstName("Sebastian"));
+        Worker worker = workerService.findByFirstName("Sebastian");
+        report.setWorker(worker);
         report.calculateTotalHours();
+
+        log.info(report.getWorker().toString());
+
         reportService.save(report);
 
         return "redirect:/reports/" + report.getId() + "/show";
@@ -85,13 +92,15 @@ public class ReportController {
     }
 
     @PostMapping("/reports/{reportId}/edit")
-    public String updateReport(@PathVariable("reportId") Long reportId, Report report, BindingResult result, Model model) {
+    public String updateReport(@PathVariable("reportId") Long reportId, @Valid Report report, BindingResult result, Model model) {
 
+        report.setId(reportId);
         if (result.hasErrors()) {
+            model.addAttribute("units", unitOfRestService.findAll());
+            model.addAttribute("projects", projectService.findAll());
             return "reports/add-update-report";
         }
 
-        report.setId(reportId);
         report.setWorker(reportService.findById(reportId).getWorker());
         report.calculateTotalHours();
         reportService.save(report);

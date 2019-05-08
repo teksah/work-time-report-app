@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="'Report - ' + ${report.workDate} + ' - ' + ${report.project.projectName} + ' - '+ ${report.worker}"></title>
+    <title th:text="#{reports.show.title(${report.workDate},${report.project.projectName},${report.worker})}"></title>
     <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 <body>
@@ -11,73 +11,78 @@
         <div class="col-md-8">
             <div class="row mb-4">
                 <div class="page-header col-md-6">
-                    <h3 class="text-left">Report Information</h3>
+                    <h3 class="text-left" th:text="#{reports.information}"></h3>
                 </div>
                 <div class="col-md-6 text-right mt-auto">
                     <a class="btn btn-labeled btn-primary" th:href="@{/reports/__${report.id}__/edit}" role="button">
-                        <span class="btn-label"><i class="far fa-edit"></i></span>Edit
+                        <span class="btn-label"><i class="far fa-edit"></i></span>
+                        <span th:text="#{button.update}"></span>
                     </a>
                     <a class="btn btn-labeled btn-primary" th:href="@{/reports/__${report.id}__/remove}" role="button">
-                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>Remove
+                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>
+                        <span th:text="#{button.remove}"></span>
                     </a>
                 </div>
             </div>
             <table class="table table-striped mb-5" th:object="${report}">
                 <tr>
-                    <th>Date</th>
+                    <th th:text="#{reports.date}"></th>
                     <td th:text="*{workDate}"></td>
                 </tr>
                 <tr>
-                    <th>Project</th>
+                    <th th:text="#{reports.project_name}"></th>
                     <td th:text="*{project.projectName}"></td>
                 </tr>
                 <tr>
-                    <th>Project Address</th>
+                    <th th:text="#{reports.project_address}"></th>
                     <td th:text="*{project.address.streetName}"></td>
                 </tr>
                 <tr>
-                    <th>Worker</th>
+                    <th th:text="#{reports.worker}"></th>
                     <td th:text="*{worker}"></td>
                 </tr>
                 <tr>
-                    <th>Start Work</th>
+                    <th th:text="#{reports.start_work}"></th>
                     <td th:text="*{startWork}"></td>
                 </tr>
                 <tr>
-                    <th>Finish Work</th>
+                    <th th:text="#{reports.finish_work}"></th>
                     <td th:text="*{finishWork}"></td>
                 </tr>
                 <tr>
-                    <th>Rest</th>
+                    <th th:text="#{reports.rest}"></th>
                     <td th:text="*{unitOfRest}"></td>
                 </tr>
                 <tr>
-                    <th>Total</th>
+                    <th th:text="#{reports.total}"></th>
                     <td th:text="*{totalHours}"></td>
                 </tr>
                 <tr>
-                    <th>Description</th>
+                    <th th:text="#{reports.description}"></th>
                     <td th:text="*{description}"></td>
                 </tr>
             </table>
 
             <div class="row mb-2">
                 <div class="page-header col-md-6">
-                    <h3 class="text-left">Reports Related to this project</h3>
+                    <h3 class="text-left" th:text="#{reports.related}"></h3>
                 </div>
             </div>
             <table class="table table-hover table-sm">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Date</th>
-                    <th>Worker</th>
-                    <th>Hours</th>
-                    <th>Description</th>
+                    <th th:text="#{reports.date}"></th>
+                    <th th:text="#{reports.worker}"></th>
+                    <th th:text="#{reports.total}"></th>
+                    <th th:text="#{reports.description}"></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr th:if="${#lists.isEmpty(reports)}">
+                    <td colspan="6" class="text-center"><span th:text="#{reports.no_reports}"></span></td>
+                </tr>
                 <tr th:each="report : ${reports}">
                     <td th:text="${report.id}"></td>
                     <td th:text="${report.workDate}"></td>
@@ -85,12 +90,14 @@
                     <td th:text="${report.totalHours}"></td>
                     <td th:text="${report.description}"></td>
                     <td class="action-links">
-                        <a th:href="@{/reports/__${report.id}__/show}" class="action-links" title="View"
-                           data-toggle="tooltip" style="margin-right: 7px"><i class="fas fa-external-link-alt"></i></a>
-                        <a th:href="@{/reports/__${report.id}__/edit}" class="action-links" title="Edit"
-                           data-toggle="tooltip" style="margin-right: 7px"><i class="far fa-edit"></i></a>
-                        <a th:href="@{/reports/__${report.id}__/remove}" class="action-links" title="Delete"
-                           data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/show}" class="action-links"
+                           th:title="#{tooltips.show}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/edit}" class="action-links"
+                           th:title="#{tooltips.edit}" data-toggle="tooltip" style="margin-right: 7px"><i
+                                class="far fa-edit"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/remove}" class="action-links"
+                           th:title="#{tooltips.delete}" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>

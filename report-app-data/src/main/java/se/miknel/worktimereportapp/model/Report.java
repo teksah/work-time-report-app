@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -19,33 +20,33 @@ import java.time.LocalTime;
 @Entity
 public class Report extends BaseEntity{
 
-    @NotNull
     @ManyToOne
     private Worker worker;
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private LocalDate workDate;
 
-    @NotNull
     @ManyToOne
+    @NotNull
     private Project project;
 
-    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
+    @NotNull
     private LocalTime startWork;
 
-    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
+    @NotNull
     private LocalTime finishWork;
 
-    @NotNull
     @OneToOne
+    @NotNull
     private UnitOfRest unitOfRest;
 
     private BigDecimal totalHours;
 
     @Lob
+    @NotEmpty
     private String description;
 
     public Report() {
