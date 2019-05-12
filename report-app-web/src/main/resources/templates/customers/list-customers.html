@@ -46,13 +46,13 @@
                             <td th:text="${customer.email}"></td>
                             <td class="action-links">
                                 <a th:href="@{/customers/__${customer.id}__/show}" class="action-links"
-                                   th:title="#{tooltips.show}" data-toggle="tooltip" style="margin-right: 7px">
+                                   th:title="#{tooltips.show}" data-tooltip="tooltip" style="margin-right: 7px">
                                     <i class="fas fa-external-link-alt"></i></a>
                                 <a th:href="@{/customers/__${customer.id}__/edit}" class="action-links"
-                                   th:title="#{tooltips.edit}" data-toggle="tooltip" style="margin-right: 7px">
+                                   th:title="#{tooltips.edit}" data-tooltip="tooltip" style="margin-right: 7px">
                                     <i class="far fa-edit"></i></a>
                                 <a th:href="@{/customers/__${customer.id}__/remove}" class="action-links"
-                                   th:title="#{tooltips.delete}" data-toggle="tooltip">
+                                   th:title="#{tooltips.delete}" data-tooltip="tooltip">
                                     <i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>

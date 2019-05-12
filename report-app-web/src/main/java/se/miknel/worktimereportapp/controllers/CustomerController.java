@@ -23,20 +23,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/customers")
-    public String showAllCustomers(Model model) {
-        model.addAttribute("customers", customerService.findAll());
-
-        return "customers/list-customers";
-    }
-
-    @GetMapping("/customers/{customerId}/show")
-    public String showCustomer(@PathVariable("customerId") Long customerId, Model model) {
-        model.addAttribute("customer", customerService.findById(customerId));
-
-        return "customers/show-customer";
-    }
-
     @GetMapping("/customers/new")
     public String showAddForm(Customer customer) {
         return "customers/add-update-customer";
@@ -63,12 +49,18 @@ public class CustomerController {
         return "redirect:/customers/"+customer.getId()+"/show";
     }
 
-    private boolean existByPhoneNumber(@Valid Customer customer) {
-        return customerService.existsByTelephoneNumber(customer.getTelephoneNumber());
+    @GetMapping("/customers")
+    public String showAllCustomers(Model model) {
+        model.addAttribute("customers", customerService.findAll());
+
+        return "customers/list-customers";
     }
 
-    private boolean existByEmail(@Valid Customer customer) {
-        return customerService.existsByEmail(customer.getEmail());
+    @GetMapping("/customers/{customerId}/show")
+    public String showCustomer(@PathVariable("customerId") Long customerId, Model model) {
+        model.addAttribute("customer", customerService.findById(customerId));
+
+        return "customers/show-customer";
     }
 
     @GetMapping("/customers/{customerId}/edit")
@@ -96,6 +88,14 @@ public class CustomerController {
         customerService.save(customer);
 
         return "redirect:/customers/" + customer.getId() + "/show";
+    }
+
+    private boolean existByPhoneNumber(@Valid Customer customer) {
+        return customerService.existsByTelephoneNumber(customer.getTelephoneNumber());
+    }
+
+    private boolean existByEmail(@Valid Customer customer) {
+        return customerService.existsByEmail(customer.getEmail());
     }
 
 

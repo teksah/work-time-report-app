@@ -34,28 +34,6 @@ public class ReportController {
         this.workerService = workerService;
     }
 
-    @RequestMapping("/reports")
-    public String showAllReports(Model model) {
-        model.addAttribute("reports", reportService.findAll());
-        return "reports/list-reports";
-    }
-
-    @RequestMapping("/reports/{reportId}/show")
-    public String showReport(@PathVariable Long reportId, Model model) {
-        Report report = reportService.findById(reportId);
-
-        model.addAttribute("report", report);
-
-        Project project = reportService.findById(reportId).getProject();
-
-        Set<Report> reportsByProject = reportService.findReportsByProject(project);
-        reportsByProject.remove(report);
-
-        model.addAttribute("reports", reportsByProject);
-
-        return "reports/show-report";
-    }
-
     @GetMapping("/reports/new")
     public String showAddForm(Report report, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
@@ -82,6 +60,28 @@ public class ReportController {
         return "redirect:/reports/" + report.getId() + "/show";
     }
 
+    @RequestMapping("/reports")
+    public String showAllReports(Model model) {
+        model.addAttribute("reports", reportService.findAll());
+        return "reports/list-reports";
+    }
+
+    @RequestMapping("/reports/{reportId}/show")
+    public String showReport(@PathVariable Long reportId, Model model) {
+        Report report = reportService.findById(reportId);
+
+        model.addAttribute("report", report);
+
+        Project project = reportService.findById(reportId).getProject();
+
+        Set<Report> reportsByProject = reportService.findReportsByProject(project);
+        reportsByProject.remove(report);
+
+        model.addAttribute("reports", reportsByProject);
+
+        return "reports/show-report";
+    }
+
     @GetMapping("/reports/{reportId}/edit")
     public String editReport(@PathVariable("reportId") Long reportId, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
@@ -106,4 +106,12 @@ public class ReportController {
         reportService.save(report);
         return "redirect:/reports/" + report.getId() + "/show";
     }
+
+    @GetMapping("/reports/{reportId}/remove")
+    public String removeReport(@PathVariable("reportId") Long reportId) {
+        reportService.deleteById(reportId);
+
+        return "redirect:/reports";
+    }
+
 }

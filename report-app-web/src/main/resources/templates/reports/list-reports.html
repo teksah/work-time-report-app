@@ -36,6 +36,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr th:if="${#lists.isEmpty(reports)}">
+                    <td colspan="9" class="text-center"><span th:text="#{reports.no_reports}"></span></td>
+                </tr>
                 <tr th:each="report : ${reports}">
                     <td th:text="${report.id}"></td>
                     <td th:text="${report.workDate}"></td>
@@ -49,14 +52,40 @@
                     <td th:text="${report.description}"></td>
                     <td class="action-links">
                         <a th:href="@{/reports/__${report.id}__/show}" class="action-links"
-                           th:title="#{tooltips.show}" data-toggle="tooltip" style="margin-right: 7px"><i
+                           th:title="#{tooltips.show}" data-tooltip="tooltip" style="margin-right: 7px"><i
                                 class="fas fa-external-link-alt"></i></a>
                         <a th:href="@{/reports/__${report.id}__/edit}" class="action-links"
-                           th:title="#{tooltips.edit}" data-toggle="tooltip" style="margin-right: 7px"><i
+                           th:title="#{tooltips.edit}" data-tooltip="tooltip" style="margin-right: 7px"><i
                                 class="far fa-edit"></i></a>
-                        <a th:href="@{/reports/__${report.id}__/remove}" class="action-links"
-                           th:title="#{tooltips.delete}" data-toggle="tooltip"><i class="far fa-trash-alt"></i></a>
+                        <a class="action-links" href="#" th:title="#{tooltips.delete}" data-tooltip="tooltip"
+                           data-toggle="modal"
+                           data-target="#modal-warning"><i class="far fa-trash-alt"></i></a>
                     </td>
+
+                    <div class="modal fade" id="modal-warning" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-warningg" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-warningg" th:text="#{modal.title}"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="#{modal.body}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            th:text="#{modal.no}"></button>
+                                    <a role="button" class="btn btn-primary"
+                                       th:href="@{/reports/__${report.id}__/remove}" th:text="#{modal.yes}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </tr>
                 </tbody>
             </table>

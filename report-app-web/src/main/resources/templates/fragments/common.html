@@ -20,10 +20,11 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip({
-                container: 'body'
-            })
+            $('body').tooltip({
+                selector: "[data-tooltip=tooltip]",
+                container: "body"
             });
+        });
 
             $(document).ready(function () {
                 $('li.active').removeClass('active');
@@ -78,7 +79,7 @@
         <div class="container text-center">
             <span class="text-muted">
                 &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span>
-                - MIKNEL Installation och Service -
+                - MIKNEL Installation | Service -
                 <span th:text="#{footer.today(${#calendars.format(#calendars.createNow(), 'dd MMM yyyy')})}"></span>
             </span>
         </div>
