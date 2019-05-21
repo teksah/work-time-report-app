@@ -20,6 +20,18 @@
 
             <!-- Form add update Project-->
             <form th:object="${project}" method="post">
+                <div th:if="*{id != null}" class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="active" th:text="#{project.status}"></label>
+                        <select th:field="*{active}" class="form-control" id="active">
+                            <option th:text="#{projects.choose}" value=""></option>
+                            <option th:value="true"
+                                    th:text="#{project.toggle.active}">
+                            <option th:value="false"
+                                    th:text="#{project.toggle.not_active}">
+                        </select>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="projectName" th:text="#{projects.project_name}"></label>

@@ -10,6 +10,10 @@
           th:href="@{/webjars/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/flag-icon-css/3.3.0/css/flag-icon.min.css}">
 
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+
 
     <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
@@ -24,6 +28,7 @@
                 selector: "[data-tooltip=tooltip]",
                 container: "body"
             });
+            $('[data-toggle="popover"]').popover()
         });
 
         $(document).ready(function () {
@@ -32,7 +37,6 @@
         });
 
         $(document).ready(function () {
-
             window.setTimeout(function () {
                 $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
                     $(this).remove();

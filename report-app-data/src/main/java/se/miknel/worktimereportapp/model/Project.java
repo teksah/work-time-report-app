@@ -28,7 +28,7 @@ public class Project extends BaseEntity{
     @NotNull
     private Customer customer;
 
-    private boolean active;
+    private Boolean active;
 
     @ManyToMany(mappedBy = "projects")
     private Set<Worker> workers = new HashSet<>();
@@ -40,14 +40,17 @@ public class Project extends BaseEntity{
         this.active = true;
     }
 
-    public Project(String projectName, Address address, Customer customer) {
+    public Project(@NotEmpty String projectName, @Valid Address address, @NotNull Customer customer, Boolean active) {
         this.projectName = projectName;
         this.address = address;
         this.customer = customer;
+        this.active = active;
     }
 
     @Override
     public String toString() {
         return this.projectName;
     }
+
+
 }

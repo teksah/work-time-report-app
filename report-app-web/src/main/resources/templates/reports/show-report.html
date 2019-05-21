@@ -34,6 +34,10 @@
                     <h3 class="text-left" th:text="#{reports.information}"></h3>
                 </div>
                 <div class="col-md-6 text-right mt-auto">
+                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
+                        <span class="btn-label"><i class="fas fa-plus"></i></span>
+                        <span th:text="#{button.add.new}"></span>
+                    </a>
                     <a class="btn btn-labeled btn-primary" th:href="@{/reports/__${report.id}__/edit}" role="button">
                         <span class="btn-label"><i class="far fa-edit"></i></span>
                         <span th:text="#{button.update}"></span>

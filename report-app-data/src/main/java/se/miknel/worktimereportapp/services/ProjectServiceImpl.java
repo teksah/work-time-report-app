@@ -54,4 +54,9 @@ public class ProjectServiceImpl implements ProjectService {
     public boolean existsByProjectName(String name) {
         return projectRepository.existsByProjectName(name);
     }
+
+    @Override
+    public Set<Project> findAllByActiveTrue() {
+        return projectRepository.findAllByActiveTrue();
+    }
 }

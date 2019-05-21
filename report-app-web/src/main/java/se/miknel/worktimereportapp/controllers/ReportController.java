@@ -38,7 +38,7 @@ public class ReportController {
     @GetMapping("/reports/new")
     public String showAddForm(Report report, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
-        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("projects", projectService.findAllByActiveTrue());
         return "reports/add-update-report";
     }
 
