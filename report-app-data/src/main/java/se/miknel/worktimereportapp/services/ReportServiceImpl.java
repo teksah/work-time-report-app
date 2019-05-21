@@ -5,7 +5,6 @@ import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
 import se.miknel.worktimereportapp.repositories.ReportRepository;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -19,10 +18,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Set<Report> findAll() {
-        Set<Report> reports = new HashSet<>();
-        reportRepository.findAll().iterator().forEachRemaining(reports::add);
-
-        return reports;
+        return reportRepository.findAllByOrderByWorkDateDesc();
     }
 
     @Override

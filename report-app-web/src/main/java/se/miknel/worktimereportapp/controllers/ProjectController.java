@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.services.CustomerService;
 import se.miknel.worktimereportapp.services.ProjectService;
@@ -34,7 +35,7 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/new")
-    public String addProject(@Valid Project project, BindingResult result, Model model) {
+    public String addProject(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (existByAddress(project)) {
             result.rejectValue("address.streetName", "error.address.streetName");
@@ -49,6 +50,7 @@ public class ProjectController {
             return "projects/add-update-project";
         }
 
+        redirectAttributes.addFlashAttribute("success", "Added");
         projectService.save(project);
 
         return "redirect:/projects/" + project.getId() + "/show";
@@ -86,7 +88,7 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/{projectId}/edit")
-    public String updateCustomer(@PathVariable("projectId") Long projectId, @Valid Project project, BindingResult result, Model model) {
+    public String updateCustomer(@PathVariable("projectId") Long projectId, @Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (!(projectService.findById(projectId).getAddress().getStreetName().equals(project.getAddress().getStreetName())) && (existByAddress(project))) {
             result.rejectValue("address.streetName", "error.address.streetName", "");
@@ -102,6 +104,7 @@ public class ProjectController {
             return "projects/add-update-project";
         }
 
+        redirectAttributes.addFlashAttribute("success", "Updated");
         projectService.save(project);
 
         return "redirect:/projects/" + project.getId() + "/show";

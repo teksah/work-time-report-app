@@ -10,11 +10,15 @@
     <div th:replace="fragments/common :: menu-navbar"></div>
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
+
+            <!-- Form Title-->
             <div class="page-header mb-4">
                 <h3 class="text-left"
                     th:with="text=${project['new']} ? #{projects.add} : #{projects.update}"
                     th:text="${text}"></h3>
             </div>
+
+            <!-- Form add update Project-->
             <form th:object="${project}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
@@ -72,6 +76,7 @@
                 <button th:with="text=${project['new']} ? #{button.add} : #{button.update}"
                         class="btn btn-primary" type="submit" th:text="${text}"></button>
             </form>
+
         </div>
     </div>
     <div th:replace="fragments/common :: footer"></div>

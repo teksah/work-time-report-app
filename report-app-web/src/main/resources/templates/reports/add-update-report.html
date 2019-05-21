@@ -3,34 +3,40 @@
 <head>
     <title th:with="text=${report['new']} ? #{reports.add} : #{reports.update}" th:text="${text}"></title>
     <th:block th:include="fragments/common :: header-css-script"></th:block>
+
+    <!-- Date Time picker-->
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+        $(function () {
+            $('#datetimepicker4').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+        });
+
+        $(function () {
+            $('#datetimepicker5').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container-fluid mt-4">
     <div th:replace="fragments/common :: menu-navbar"></div>
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
+
+            <!-- Form Title-->
             <div class="page-header mb-4">
                 <h3 class="text-left" th:with="text=${report['new']} ? #{reports.add} : #{reports.update}"
                     th:text="${text}"></h3>
             </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker3').datetimepicker({
-                        format: 'HH:mm'
-                    });
-                });
-                $(function () {
-                    $('#datetimepicker4').datetimepicker({
-                        format: 'YYYY-MM-DD'
-                    });
-                });
 
-                $(function () {
-                    $('#datetimepicker5').datetimepicker({
-                        format: 'HH:mm'
-                    });
-                });
-            </script>
+            <!-- Form add update Report-->
             <form th:object="${report}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-5">
@@ -113,8 +119,10 @@
                               th:class="${#fields.hasErrors('description')} ? 'form-control is-invalid' : 'form-control'"></textarea>
                     <p th:errors="*{unitOfRest}" class="invalid-feedback"></p>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Add Report"/>
+                <button th:with="text=${report['new']} ? #{button.add} : #{button.update}"
+                        class="btn btn-primary" type="submit" th:text="${text}"></button>
             </form>
+
         </div>
     </div>
     <div th:replace="fragments/common :: footer"></div>

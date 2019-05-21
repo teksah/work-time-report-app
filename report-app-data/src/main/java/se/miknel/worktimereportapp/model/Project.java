@@ -1,7 +1,6 @@
 package se.miknel.worktimereportapp.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -15,7 +14,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 public class Project extends BaseEntity{
 
@@ -30,11 +28,17 @@ public class Project extends BaseEntity{
     @NotNull
     private Customer customer;
 
+    private boolean active;
+
     @ManyToMany(mappedBy = "projects")
     private Set<Worker> workers = new HashSet<>();
 
     @OneToMany(mappedBy = "project")
     private List<Report> reports = new ArrayList<>();
+
+    public Project() {
+        this.active = true;
+    }
 
     public Project(String projectName, Address address, Customer customer) {
         this.projectName = projectName;
@@ -42,5 +46,8 @@ public class Project extends BaseEntity{
         this.customer = customer;
     }
 
-
+    @Override
+    public String toString() {
+        return this.projectName;
+    }
 }

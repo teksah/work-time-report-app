@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.miknel.worktimereportapp.model.Project;
 import se.miknel.worktimereportapp.model.Report;
 import se.miknel.worktimereportapp.model.Worker;
@@ -42,7 +43,7 @@ public class ReportController {
     }
 
     @PostMapping("/reports/new")
-    public String addReport(@Valid Report report, BindingResult result, Model model) {
+    public String addReport(@Valid Report report, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("units", unitOfRestService.findAll());
             model.addAttribute("projects", projectService.findAll());
@@ -55,6 +56,7 @@ public class ReportController {
 
         log.info(report.getWorker().toString());
 
+        redirectAttributes.addFlashAttribute("success", "Added");
         reportService.save(report);
 
         return "redirect:/reports/" + report.getId() + "/show";
@@ -92,9 +94,9 @@ public class ReportController {
     }
 
     @PostMapping("/reports/{reportId}/edit")
-    public String updateReport(@PathVariable("reportId") Long reportId, @Valid Report report, BindingResult result, Model model) {
-
+    public String updateReport(@PathVariable("reportId") Long reportId, @Valid Report report, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         report.setId(reportId);
+
         if (result.hasErrors()) {
             model.addAttribute("units", unitOfRestService.findAll());
             model.addAttribute("projects", projectService.findAll());
@@ -103,12 +105,15 @@ public class ReportController {
 
         report.setWorker(reportService.findById(reportId).getWorker());
         report.calculateTotalHours();
+        redirectAttributes.addFlashAttribute("success", "Updated");
         reportService.save(report);
         return "redirect:/reports/" + report.getId() + "/show";
     }
 
     @GetMapping("/reports/{reportId}/remove")
-    public String removeReport(@PathVariable("reportId") Long reportId) {
+    public String removeReport(@PathVariable("reportId") Long reportId, RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("success", "Deleted");
         reportService.deleteById(reportId);
 
         return "redirect:/reports";
