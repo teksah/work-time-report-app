@@ -28,6 +28,7 @@ public class Project extends BaseEntity{
     @NotNull
     private Customer customer;
 
+    @NotNull
     private Boolean active;
 
     @ManyToMany(mappedBy = "projects")

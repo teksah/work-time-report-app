@@ -99,6 +99,7 @@ public class ProjectController {
         }
 
         project.setId(projectId);
+
         if (result.hasErrors()) {
             model.addAttribute("customers", customerService.findAll());
             return "projects/add-update-project";
