@@ -65,7 +65,7 @@ public class ProjectController {
         return projectService.existsByAddress_StreetName(project.getAddress().getStreetName());
     }
 
-    @RequestMapping("/projects")
+    @RequestMapping("/projects/")
     public String showAllReports(Model model) {
         model.addAttribute("projects", projectService.findAll());
         model.addAttribute("activeProjects", projectService.findAll(true));

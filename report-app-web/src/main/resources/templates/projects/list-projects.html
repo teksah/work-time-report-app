@@ -80,7 +80,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(activeProjects)}">
+                        <tr th:if="${#lists.isEmpty(projects)}">
                             <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                         </tr>
                         <tr th:each="project : ${activeProjects}">
@@ -183,8 +183,6 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
     <div th:replace="fragments/common :: footer"></div>
