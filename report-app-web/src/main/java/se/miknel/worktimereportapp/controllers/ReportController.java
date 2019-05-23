@@ -38,7 +38,7 @@ public class ReportController {
     @GetMapping("/reports/new")
     public String showAddForm(Report report, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
-        model.addAttribute("projects", projectService.findAllByActiveTrue());
+        model.addAttribute("projects", projectService.findAll(true));
         return "reports/add-update-report";
     }
 
@@ -46,7 +46,7 @@ public class ReportController {
     public String addReport(@Valid Report report, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("units", unitOfRestService.findAll());
-            model.addAttribute("projects", projectService.findAllByActiveTrue());
+            model.addAttribute("projects", projectService.findAll(true));
             return "reports/add-update-report";
         }
 
@@ -87,7 +87,7 @@ public class ReportController {
     @GetMapping("/reports/{reportId}/edit")
     public String editReport(@PathVariable("reportId") Long reportId, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
-        model.addAttribute("projects", projectService.findAllByActiveTrue());
+        model.addAttribute("projects", projectService.findAll(true));
         model.addAttribute("report", reportService.findById(reportId));
 
         return "reports/add-update-report";
@@ -99,7 +99,7 @@ public class ReportController {
 
         if (result.hasErrors()) {
             model.addAttribute("units", unitOfRestService.findAll());
-            model.addAttribute("projects", projectService.findAllByActiveTrue());
+            model.addAttribute("projects", projectService.findAll(true));
             return "reports/add-update-report";
         }
 

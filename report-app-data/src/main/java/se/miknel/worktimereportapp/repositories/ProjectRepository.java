@@ -12,4 +12,6 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 
     Set<Project> findAllByActiveTrue();
 
+    Set<Project> findAllByActiveFalse();
+
 }

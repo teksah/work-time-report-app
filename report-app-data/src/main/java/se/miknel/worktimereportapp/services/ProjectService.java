@@ -10,5 +10,6 @@ public interface ProjectService extends CrudService<Project, Long> {
 
     boolean existsByProjectName(String name);
 
-    Set<Project> findAllByActiveTrue();
+    Set<Project> findAll(boolean active);
+
 }
