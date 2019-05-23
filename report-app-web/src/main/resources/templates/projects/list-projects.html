@@ -28,13 +28,14 @@
                 </th:block>
             </div>
 
-            <!--Table title and buttons-->
+            <!--Table title-->
             <div class="row mb-4">
                 <div class="page-header col-md-10">
                     <h3 class="text-left" th:text="#{projects.project_list}"></h3>
                 </div>
             </div>
 
+            <!--Table navs and button-->
             <div class="row">
                 <ul class="nav nav-pills pl-3 mb-3 col-md-10" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -63,6 +64,7 @@
                 </div>
             </div>
 
+            <!--Table content-->
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-active" role="tabpanel"
                      aria-labelledby="active-projects-tab">
@@ -78,6 +80,9 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr th:if="${#lists.isEmpty(activeProjects)}">
+                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
+                        </tr>
                         <tr th:each="project : ${activeProjects}">
                             <td th:text="${project.id}"></td>
                             <td>
@@ -114,6 +119,9 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr th:if="${#lists.isEmpty(notActiveProjects)}">
+                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
+                        </tr>
                         <tr th:each="project : ${notActiveProjects}">
                             <td th:text="${project.id}"></td>
                             <td>
@@ -149,6 +157,9 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr th:if="${#lists.isEmpty(projects)}">
+                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
+                        </tr>
                         <tr th:each="project : ${projects}">
                             <td th:text="${project.id}"></td>
                             <td>
