@@ -10,6 +10,21 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
 
+            <!--Alerts-->
+            <div th:if="${success != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <th:block th:switch="${success}">
+                    <div th:case="'Added'">
+                        <span th:text="#{alert.customer.add}"></span>
+                    </div>
+                    <div th:case="'Updated'">
+                        <span th:text="#{alert.customer.update}"></span>
+                    </div>
+                </th:block>
+            </div>
+
             <!--Table title and buttons-->
             <div class="row mb-4">
                 <div class="page-header col-md-6">
@@ -21,10 +36,38 @@
                         <span class="btn-label"><i class="far fa-edit"></i></span>
                         <span th:text="#{button.update}"></span>
                     </a>
-                    <a class="btn btn-labeled btn-primary" th:href="@{/customers/__${customer.id}__/remove}" role="button">
-                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>
-                        <span th:text="#{button.remove}"></span>
-                    </a>
+
+                    <!--Toogle status info-->
+                    <span data-toggle="popover"
+                          data-placement="top"
+                          th:data-content="#{toggle.active.popover}">
+                        <input type="checkbox" id="toggle-status"/>
+                    </span>
+                    <script>
+                        $(function () {
+                            $('#toggle-status').bootstrapToggle({
+                                on: '[[#{project.toggle.active}]]',
+                                off: '[[#{project.toggle.not_active}]]',
+                                onstyle: 'success',
+                                offstyle: 'danger',
+                                height: 38,
+                                width: 150
+                            });
+
+                            var active = [[${customer.active}]];
+
+                            if (active) {
+                                $('#toggle-status').bootstrapToggle('on');
+                            } else {
+                                $('#toggle-status').bootstrapToggle('off');
+
+                            }
+                            $('#toggle-status').bootstrapToggle('disable');
+                        })
+
+
+                    </script>
+
                 </div>
             </div>
 

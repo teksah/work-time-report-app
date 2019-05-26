@@ -41,7 +41,7 @@ public class Project extends BaseEntity{
         this.active = true;
     }
 
-    public Project(@NotEmpty String projectName, @Valid Address address, @NotNull Customer customer, Boolean active) {
+    public Project(String projectName, Address address, Customer customer, Boolean active) {
         this.projectName = projectName;
         this.address = address;
         this.customer = customer;

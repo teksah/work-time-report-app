@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.miknel.worktimereportapp.model.Customer;
 import se.miknel.worktimereportapp.services.CustomerService;
 import se.miknel.worktimereportapp.services.ProjectService;
@@ -29,7 +30,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public String addCustomer(@Valid Customer customer, BindingResult result) {
+    public String addCustomer(@Valid Customer customer, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (existByEmail(customer)) {
             result.rejectValue("email", "error.email", "");
@@ -43,6 +44,7 @@ public class CustomerController {
             return "customers/add-update-customer";
         }
 
+        redirectAttributes.addFlashAttribute("success", "Added");
 
         customerService.save(customer);
 
@@ -70,7 +72,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/{customerId}/edit")
-    public String updateCustomer(@PathVariable("customerId") Long customerId, @Valid Customer customer, BindingResult result, Model model) {
+    public String updateCustomer(@PathVariable("customerId") Long customerId, @Valid Customer customer, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (!(customerService.findById(customerId).getEmail().equals(customer.getEmail())) && (existByEmail(customer))) {
             result.rejectValue("email", "error.email", "");
@@ -85,6 +87,7 @@ public class CustomerController {
             return "customers/add-update-customer";
         }
 
+        redirectAttributes.addFlashAttribute("success", "Updated");
         customerService.save(customer);
 
         return "redirect:/customers/" + customer.getId() + "/show";

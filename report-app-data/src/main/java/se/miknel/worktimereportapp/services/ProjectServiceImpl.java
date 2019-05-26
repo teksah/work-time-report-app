@@ -25,18 +25,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projects;
     }
 
-    public Set<Project> findAll(boolean active) {
-        Set<Project> projects = new HashSet<>();
-
-        if (!active) {
-            projectRepository.findAllByActiveFalse().iterator().forEachRemaining(projects::add);
-            return projects;
-        }
-
-        projectRepository.findAllByActiveTrue().iterator().forEachRemaining(projects::add);
-        return projects;
-    }
-
     @Override
     public Project findById(Long aLong) {
         return projectRepository.findById(aLong).orElse(null);

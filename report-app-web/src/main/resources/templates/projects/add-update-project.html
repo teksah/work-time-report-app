@@ -51,6 +51,7 @@
                                 th:class="${#fields.hasErrors('customer')} ? 'form-control is-invalid' : 'form-control'">
                             <option th:text="#{projects.choose}" value=""></option>
                             <option th:each="customer : ${customers}"
+                                    th:if="${customer.active == true}"
                                     th:value="${customer.id}"
                                     th:text="${customer}">
                             </option>

@@ -10,24 +10,6 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-10">
 
-            <!--Alerts-->
-            <div th:if="${success != null}" class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <th:block th:switch="${success}">
-                    <div th:case="'Added'">
-                        <span th:text="#{alert.project.add}"></span>
-                    </div>
-                    <div th:case="'Deleted'">
-                        <span th:text="#{alert.project.delete}"></span>
-                    </div>
-                    <div th:case="'Updated'">
-                        <span th:text="#{alert.project.update}"></span>
-                    </div>
-                </th:block>
-            </div>
-
             <!--Table title-->
             <div class="row mb-4">
                 <div class="page-header col-md-10">
@@ -37,6 +19,8 @@
 
             <!--Table navs and button-->
             <div class="row">
+
+                <!--Navpills-->
                 <ul class="nav nav-pills pl-3 mb-3 col-md-10" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="active-projects-tab" data-toggle="pill" href="#pills-active"
@@ -55,6 +39,7 @@
                     </li>
                 </ul>
 
+                <!--Add button-->
                 <div class="col-md-2 text-right">
                     <a class="btn btn-primary btn-labeled" href="#"
                        th:href="@{'/projects/new'}" role="button">
@@ -68,7 +53,7 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-active" role="tabpanel"
                      aria-labelledby="active-projects-tab">
-                    <!--Table list of Projects-->
+                    <!--Table list of ACTIVE Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -83,7 +68,8 @@
                         <tr th:if="${#lists.isEmpty(projects)}">
                             <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                         </tr>
-                        <tr th:each="project : ${activeProjects}">
+                        <tr th:each="project : ${projects}"
+                            th:if="${project.active == true}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>
@@ -107,7 +93,7 @@
                 </div>
                 <div class="tab-pane fade" id="pills-not-active" role="tabpanel"
                      aria-labelledby="not-active-projects-tab">
-                    <!--Table list of Projects-->
+                    <!--Table list of NOT ACTIVE Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -119,10 +105,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(notActiveProjects)}">
+                        <tr th:if="${#lists.isEmpty(projects)}">
                             <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                         </tr>
-                        <tr th:each="project : ${notActiveProjects}">
+                        <tr th:each="project : ${projects}"
+                            th:if="${project.active == false}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>
@@ -145,7 +132,7 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="pills-all" role="tabpanel" aria-labelledby="all-projects-tab">
-                    <!--Table list of Projects-->
+                    <!--Table list of ALL Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>

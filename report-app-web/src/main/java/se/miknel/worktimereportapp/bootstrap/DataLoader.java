@@ -28,9 +28,9 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Customer customer1 = new Customer("Jan", "Fasola", "0735787921", "fasola@fasola.com");
-        Customer customer2 = new Customer("Pawel", "Gawel", "0725787984", "gawel@gawel.com");
-        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com");
+        Customer customer1 = new Customer("Jan", "Fasola", "0735787921", "fasola@fasola.com", true);
+        Customer customer2 = new Customer("Pawel", "Gawel", "0725787984", "gawel@gawel.com", true);
+        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com", false);
 
         customerService.save(customer1);
         customerService.save(customer2);
