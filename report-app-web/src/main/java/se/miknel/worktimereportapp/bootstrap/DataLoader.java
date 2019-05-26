@@ -16,13 +16,15 @@ public class DataLoader implements CommandLineRunner {
     private final ProjectService projectService;
     private final ReportService reportService;
     private final UnitOfRestService unitOfRestService;
+    private final WorkerTypeService workerTypeService;
 
-    public DataLoader(WorkerService workerService, CustomerService customerService, ProjectService projectService, ReportService reportService, UnitOfRestService unitOfRestService) {
+    public DataLoader(WorkerService workerService, CustomerService customerService, ProjectService projectService, ReportService reportService, UnitOfRestService unitOfRestService, WorkerTypeService workerTypeService) {
         this.workerService = workerService;
         this.customerService = customerService;
         this.projectService = projectService;
         this.reportService = reportService;
         this.unitOfRestService = unitOfRestService;
+        this.workerTypeService = workerTypeService;
     }
 
     @Override
@@ -51,9 +53,9 @@ public class DataLoader implements CommandLineRunner {
         projectService.save(project3);
         projectService.save(project4);
 
-        Worker worker1 = new Worker("Sebastian", "Bakowski");
-        Worker worker2 = new Worker("Sebastianek", "Gaciarz");
-        Worker worker3 = new Worker("Mariusz", "Gaciarz");
+        Worker worker1 = new Worker(workerTypeService.findById(3L), "Sebastian", "Bakowski", "1234567891", "sebbak90@gmail.com", true);
+        Worker worker2 = new Worker(workerTypeService.findById(2L), "Sebastianek", "Gaciarz", "3214567891", "gaciarz@gmail.com", true);
+        Worker worker3 = new Worker(workerTypeService.findById(3L), "Mariusz", "Gaciarz", "8884567891", "mariusz@gmail.com", true);
 
         worker1.addProject(project1);
         worker1.addProject(project3);

@@ -5,10 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,29 +13,15 @@ import java.util.List;
 @Entity
 public class Customer extends Person {
 
-    @NotEmpty
-    @Pattern(regexp = "^$|[0-9]{10}$")
-    private String telephoneNumber;
-
-    @NotEmpty
-    @Email
-    private String email;
-
-    @NotNull
-    private Boolean active;
-
     @OneToMany(mappedBy = "customer")
     private List<Project> projects = new ArrayList<>();
 
     public Customer() {
-        this.active = true;
+        setActive(true);
     }
 
     public Customer(String firstName, String lastName, String telephoneNumber, String email, Boolean active) {
-        super(firstName, lastName);
-        this.telephoneNumber = telephoneNumber;
-        this.email = email;
-        this.active = active;
+        super(firstName, lastName, telephoneNumber, email, active);
     }
 
     @Override

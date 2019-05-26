@@ -45,7 +45,6 @@ public class CustomerController {
         }
 
         redirectAttributes.addFlashAttribute("success", "Added");
-
         customerService.save(customer);
 
         return "redirect:/customers/"+customer.getId()+"/show";

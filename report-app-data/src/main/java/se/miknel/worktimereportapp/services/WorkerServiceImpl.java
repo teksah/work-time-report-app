@@ -50,4 +50,14 @@ public class WorkerServiceImpl implements WorkerService{
         return workerRepository.findByFirstName(firstName);
     }
 
+    @Override
+    public boolean existsByTelephoneNumber(String telephoneNumber) {
+        return false;
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return false;
+    }
+
 }
