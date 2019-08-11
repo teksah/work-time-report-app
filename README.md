@@ -8,6 +8,11 @@ Small web-app using crud operation. Application was created to organize work rep
 ./mvnw install && ./mvnw spring-boot:run -pl report-app-web
 ```
 
+then, visit 
+```
+http://localhost:8080/
+```
+
 ## Built With
 
 * Spring Boot 2
