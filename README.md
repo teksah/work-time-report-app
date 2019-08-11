@@ -8,10 +8,6 @@ Small web-app using crud operation. Application was created to organize work rep
 ./mvnw install && ./mvnw spring-boot:run -pl report-app-web
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
- to deploy this on a live system
-
 ## Built With
 
 * Spring Boot 2
