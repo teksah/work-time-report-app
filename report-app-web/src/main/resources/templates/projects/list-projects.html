@@ -49,11 +49,11 @@
                 </div>
             </div>
 
-            <!--Table content-->
+            <!--Table contents-->
             <div class="tab-content" id="pills-tabContent">
+                <!--Table list of ACTIVE Projects-->
                 <div class="tab-pane fade show active" id="pills-active" role="tabpanel"
                      aria-labelledby="active-projects-tab">
-                    <!--Table list of ACTIVE Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -65,11 +65,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(projects)}">
+                        <tr th:if="${#lists.isEmpty(activeProjects)}">
                             <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                         </tr>
-                        <tr th:each="project : ${projects}"
-                            th:if="${project.active == true}">
+                        <tr th:each="project : ${activeProjects}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>
@@ -91,9 +90,9 @@
                         </tbody>
                     </table>
                 </div>
+                <!--Table list of NOT ACTIVE Projects-->
                 <div class="tab-pane fade" id="pills-not-active" role="tabpanel"
                      aria-labelledby="not-active-projects-tab">
-                    <!--Table list of NOT ACTIVE Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -105,11 +104,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(projects)}">
+                        <tr th:if="${#lists.isEmpty(notActiveProjects)}">
                             <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
                         </tr>
-                        <tr th:each="project : ${projects}"
-                            th:if="${project.active == false}">
+                        <tr th:each="project : ${notActiveProjects}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>
@@ -131,8 +129,8 @@
                         </tbody>
                     </table>
                 </div>
+                <!--Table list of ALL Projects-->
                 <div class="tab-pane fade" id="pills-all" role="tabpanel" aria-labelledby="all-projects-tab">
-                    <!--Table list of ALL Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>

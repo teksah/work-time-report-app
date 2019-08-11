@@ -32,7 +32,7 @@ public class DataLoader implements CommandLineRunner {
 
         Customer customer1 = new Customer("Jan", "Fasola", "0735787921", "fasola@fasola.com", true);
         Customer customer2 = new Customer("Pawel", "Gawel", "0725787984", "gawel@gawel.com", true);
-        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com", false);
+        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com", true);
 
         customerService.save(customer1);
         customerService.save(customer2);
@@ -46,7 +46,7 @@ public class DataLoader implements CommandLineRunner {
         Project project1 = new Project("Mieszkanie Centrum", address1, customer1, true);
         Project project2 = new Project("Block Alvsio", address2, customer1, true);
         Project project3 = new Project("Remont Pokoju", address3, customer2, true);
-        Project project4 = new Project("Lustro Lazienka", address4, customer3, false);
+        Project project4 = new Project("Lustro Lazienka", address4, customer3, true);
 
         projectService.save(project1);
         projectService.save(project2);

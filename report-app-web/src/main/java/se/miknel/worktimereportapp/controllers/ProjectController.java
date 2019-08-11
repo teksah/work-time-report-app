@@ -68,6 +68,8 @@ public class ProjectController {
     @RequestMapping("/projects/")
     public String showAllReports(Model model) {
         model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("activeProjects", projectService.findAll(true));
+        model.addAttribute("notActiveProjects", projectService.findAll(false));
         return "projects/list-projects";
     }
 

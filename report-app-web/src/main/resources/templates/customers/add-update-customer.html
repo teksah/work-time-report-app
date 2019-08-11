@@ -40,7 +40,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstName" th:text="#{theaders.first_name}"></label>
-                        <input type="text" th:field="*{firstName}" id="firstName"
+                        <input type="text"
+                               th:field="*{firstName}" id="firstName"
                                th:placeholder="#{theaders.first_name}"
                                th:class="${#fields.hasErrors('firstName')} ? 'form-control is-invalid' : 'form-control'">
                         <p th:errors="*{firstName}" class="invalid-feedback"></p>
@@ -68,7 +69,6 @@
                         <p th:errors="*{email}" class="invalid-feedback"></p>
                     </div>
                 </div>
-
                 <button th:with="text=${customer['new']} ? #{button.add} : #{button.update}"
                         class="btn btn-primary" type="submit" th:text="${text}"></button>
             </form>

@@ -19,7 +19,6 @@
 
             <!--Table navs and button-->
             <div class="row">
-
                 <!--Navpills-->
                 <ul class="nav nav-pills pl-3 mb-3 col-md-10" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -38,7 +37,6 @@
                            th:text="#{customers.tab.all}"></a>
                     </li>
                 </ul>
-
                 <!--Add button-->
                 <div class="col-md-2 text-right">
                     <a class="btn btn-primary btn-labeled" href="#"
@@ -51,9 +49,10 @@
 
             <!--Table content-->
             <div class="tab-content" id="pills-tabContent">
+                <!--Table list of ACTIVE CUSTOMERS-->
                 <div class="tab-pane fade show active" id="pills-active" role="tabpanel"
                      aria-labelledby="active-projects-tab">
-                    <!--Table list of ACTIVE Projects-->
+
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -65,11 +64,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(customers)}">
+                        <tr th:if="${#lists.isEmpty(activeCustomers)}">
                             <td colspan="5" class="text-center"><span th:text="#{customers.no_customers}"></span></td>
                         </tr>
-                        <tr th:each="customer : ${customers}"
-                            th:if="${customer.active == true}">
+                        <tr th:each="customer : ${activeCustomers}">
                             <td th:text="${customer.id}"></td>
                             <td>
                                 <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
@@ -88,9 +86,9 @@
                         </tbody>
                     </table>
                 </div>
+                <!--Table list of NOT ACTIVE CUSTOMERS-->
                 <div class="tab-pane fade" id="pills-not-active" role="tabpanel"
                      aria-labelledby="not-active-projects-tab">
-                    <!--Table list of NOT ACTIVE Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -102,11 +100,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(customers)}">
+                        <tr th:if="${#lists.isEmpty(notActiveCustomers)}">
                             <td colspan="5" class="text-center"><span th:text="#{customers.no_customers}"></span></td>
                         </tr>
-                        <tr th:each="customer : ${customers}"
-                            th:if="${customer.active == false}">
+                        <tr th:each="customer : ${notActiveCustomers}">
                             <td th:text="${customer.id}"></td>
                             <td>
                                 <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
@@ -125,8 +122,8 @@
                         </tbody>
                     </table>
                 </div>
+                <!--Table list of ALL CUSTOMERS-->
                 <div class="tab-pane fade" id="pills-all" role="tabpanel" aria-labelledby="all-projects-tab">
-                    <!--Table list of ALL Projects-->
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>

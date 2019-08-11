@@ -53,6 +53,8 @@ public class CustomerController {
     @GetMapping("/customers")
     public String showAllCustomers(Model model) {
         model.addAttribute("customers", customerService.findAll());
+        model.addAttribute("activeCustomers", customerService.findAll(true));
+        model.addAttribute("notActiveCustomers", customerService.findAll(false));
 
         return "customers/list-customers";
     }
@@ -87,7 +89,9 @@ public class CustomerController {
         }
 
         redirectAttributes.addFlashAttribute("success", "Updated");
+
         customerService.save(customer);
+
 
         return "redirect:/customers/" + customer.getId() + "/show";
     }
