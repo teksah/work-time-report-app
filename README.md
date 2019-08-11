@@ -1,10 +1,10 @@
 # Work Time Report App
 
-Small web-app using crud operation. Application was created to organize work reports in company.<br>Still under construction...
+Small web-app using crud operation. Application was created to organize work reports in the company.<br>Still under construction...
 
 
 ### Installing
-Inside folder run:
+Run this inside a folder
 ```
 ./mvnw install && ./mvnw spring-boot:run -pl report-app-web
 ```
