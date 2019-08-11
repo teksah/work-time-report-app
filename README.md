@@ -4,14 +4,15 @@ Small web-app using crud operation. Application was created to organize work rep
 
 
 ### Installing
+Inside folder run:
 ```
 ./mvnw install && ./mvnw spring-boot:run -pl report-app-web
 ```
 
 then, go to
-```
-http://localhost:8080/
-```
+
+[http://localhost:8080/](http://localhost:8080/)
+
 
 ## Built With
 
