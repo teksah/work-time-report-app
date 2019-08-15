@@ -41,18 +41,36 @@ public class ReportServiceImpl implements ReportService {
         if (workerOptional.isPresent()) {
             Worker worker = workerOptional.get();
             worker.addProject(object.getProject());
+
+            workerRepository.save(worker);
         }
 
         return reportRepository.save(object);
     }
 
+    @Transactional
     @Override
     public void delete(Report object) {
+        Optional<Worker> workerOptional = workerRepository.findById(object.getWorker().getId());
+
+        if (workerOptional.isPresent()) {
+            Worker worker = workerOptional.get();
+            worker.removeProject(object.getProject());
+        }
         reportRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
+
+        Report object = findById(aLong);
+
+        Optional<Worker> workerOptional = workerRepository.findById(object.getWorker().getId());
+
+        if (workerOptional.isPresent()) {
+            Worker worker = workerOptional.get();
+            worker.removeProject(object.getProject());
+        }
         reportRepository.deleteById(aLong);
     }
 

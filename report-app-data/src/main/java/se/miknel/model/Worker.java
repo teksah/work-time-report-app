@@ -40,6 +40,11 @@ public class Worker extends Person {
         project.getWorkers().add(this);
     }
 
+    public void removeProject(Project project) {
+        this.projects.remove(project);
+        project.getWorkers().remove(this);
+    }
+
     @Override
     public String toString() {
         return super.toString();
