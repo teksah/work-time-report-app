@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.miknel.model.Project;
 import se.miknel.model.Report;
-import se.miknel.model.Worker;
 import se.miknel.services.ProjectService;
 import se.miknel.services.ReportService;
 import se.miknel.services.UnitOfRestService;
@@ -26,13 +25,11 @@ public class ReportController {
     private final ReportService reportService;
     private final ProjectService projectService;
     private final UnitOfRestService unitOfRestService;
-    private final WorkerService workerService;
 
     public ReportController(ReportService reportService, ProjectService projectService, UnitOfRestService unitOfRestService, WorkerService workerService) {
         this.reportService = reportService;
         this.projectService = projectService;
         this.unitOfRestService = unitOfRestService;
-        this.workerService = workerService;
     }
 
     @GetMapping("/reports/new")
@@ -50,12 +47,6 @@ public class ReportController {
             return "reports/add-update-report";
         }
 
-        Worker worker = workerService.findByFirstName("Sebastian");
-        report.setWorker(worker);
-        report.calculateTotalHours();
-
-        log.info(report.getWorker().toString());
-
         redirectAttributes.addFlashAttribute("success", "Added");
         reportService.save(report);
 
@@ -71,11 +62,9 @@ public class ReportController {
     @RequestMapping("/reports/{reportId}/show")
     public String showReport(@PathVariable Long reportId, Model model) {
         Report report = reportService.findById(reportId);
-
         model.addAttribute("report", report);
 
         Project project = reportService.findById(reportId).getProject();
-
         Set<Report> reportsByProject = reportService.findReportsByProject(project);
         reportsByProject.remove(report);
 
@@ -103,10 +92,9 @@ public class ReportController {
             return "reports/add-update-report";
         }
 
-        report.setWorker(reportService.findById(reportId).getWorker());
-        report.calculateTotalHours();
         redirectAttributes.addFlashAttribute("success", "Updated");
         reportService.save(report);
+
         return "redirect:/reports/" + report.getId() + "/show";
     }
 

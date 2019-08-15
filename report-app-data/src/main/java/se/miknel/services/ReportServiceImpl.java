@@ -36,10 +36,13 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Report save(Report object) {
 
-        Optional<Worker> workerOptional = workerRepository.findById(object.getWorker().getId());
+        Optional<Worker> workerOptional = workerRepository.findById(1L);
 
         if (workerOptional.isPresent()) {
             Worker worker = workerOptional.get();
+            object.setWorker(worker);
+            object.calculateTotalHours();
+
             worker.addProject(object.getProject());
 
             workerRepository.save(worker);
