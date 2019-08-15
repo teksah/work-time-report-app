@@ -57,16 +57,6 @@ public class DataLoader implements CommandLineRunner {
         Worker worker2 = new Worker(workerTypeService.findById(2L), "Sebastianek", "Gaciarz", "3214567891", "gaciarz@gmail.com", true);
         Worker worker3 = new Worker(workerTypeService.findById(3L), "Mariusz", "Gaciarz", "8884567891", "mariusz@gmail.com", true);
 
-        worker1.addProject(project1);
-        worker1.addProject(project3);
-        worker1.addProject(project4);
-
-        worker2.addProject(project1);
-        worker2.addProject(project3);
-
-        worker3.addProject(project2);
-        worker3.addProject(project3);
-
         workerService.save(worker1);
         workerService.save(worker2);
         workerService.save(worker3);
