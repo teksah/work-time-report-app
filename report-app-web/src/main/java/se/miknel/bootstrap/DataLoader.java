@@ -62,26 +62,12 @@ public class DataLoader implements CommandLineRunner {
         workerService.save(worker3);
 
         Report report1 = new Report(worker1, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "rywning grund");
-        report1.calculateTotalHours();
-
         Report report2 = new Report(worker2, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0.5)), "rywning grund");
-        report2.calculateTotalHours();
-
         Report report3 = new Report(worker3, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "kompletowanie");
-        report3.calculateTotalHours();
-
         Report report4 = new Report(worker1, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "spotkanie");
-        report4.calculateTotalHours();
-
         Report report5 = new Report(worker2, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
-        report5.calculateTotalHours();
-
         Report report6 = new Report(worker3, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
-        report6.calculateTotalHours();
-
         Report report7 = new Report(worker1, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "grund");
-        report7.calculateTotalHours();
-
 
         reportService.save(report1);
         reportService.save(report2);

@@ -17,11 +17,9 @@ import java.util.Set;
 public class CustomerServiceImpl implements CustomerService{
 
     private final CustomerRepository customerRepository;
-    private final ProjectRepository projectRepository;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, ProjectRepository projectRepository) {
         this.customerRepository = customerRepository;
-        this.projectRepository = projectRepository;
     }
 
     @Override
