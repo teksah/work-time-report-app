@@ -82,7 +82,6 @@ public class CustomerController {
         if (!(customerService.findById(customerId).getTelephoneNumber().equals(customer.getTelephoneNumber())) && (existByPhoneNumber(customer))) {
             result.rejectValue("telephoneNumber", "error.telephone_number", "");
         }
-
         customer.setId(customerId);
         if (result.hasErrors()) {
             return "customers/add-update-customer";
