@@ -96,6 +96,7 @@ public class CustomerController {
     }
 
     private boolean existByPhoneNumber(@Valid Customer customer) {
+
         return customerService.existsByTelephoneNumber(customer.getTelephoneNumber());
     }
 
