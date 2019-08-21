@@ -118,7 +118,7 @@
                     <label for="description" th:text="#{reports.description}"></label>
                     <textarea class="form-control" th:field="*{description}" id="description" rows="3"
                               th:class="${#fields.hasErrors('description')} ? 'form-control is-invalid' : 'form-control'"></textarea>
-                    <p th:errors="*{unitOfRest}" class="invalid-feedback"></p>
+                    <p th:errors="*{description}" class="invalid-feedback"></p>
                 </div>
                 <button th:with="text=${report['new']} ? #{button.add} : #{button.update}"
                         class="btn btn-primary" type="submit" th:text="${text}"></button>
