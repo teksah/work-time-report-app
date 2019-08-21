@@ -8,7 +8,7 @@ public class IndexController {
 
     @RequestMapping({"", "index", "index.html", "/"})
     public String indexPage() {
-        return "redirect:/reports";
+        return "redirect:/reports/";
     }
 
 

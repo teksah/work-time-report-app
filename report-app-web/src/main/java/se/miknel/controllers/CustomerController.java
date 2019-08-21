@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.miknel.model.Customer;
 import se.miknel.services.CustomerService;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@RequestMapping("/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -24,12 +26,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/customers/new")
+    @GetMapping("/new")
     public String showAddForm(Customer customer) {
         return "customers/add-update-customer";
     }
 
-    @PostMapping("/customers/new")
+    @PostMapping("/new")
     public String addCustomer(@Valid Customer customer, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (existByEmail(customer)) {
@@ -50,26 +52,26 @@ public class CustomerController {
         return "redirect:/customers/"+customer.getId()+"/show";
     }
 
-    @GetMapping("/customers")
+    @GetMapping("/")
     public String showAllCustomers(Model model) {
         model.addAttribute("customers", customerService.findAll());
         return "customers/list-customers";
     }
 
-    @GetMapping("/customers/{customerId}/show")
+    @GetMapping("/{customerId}/show")
     public String showCustomer(@PathVariable("customerId") Long customerId, Model model) {
         model.addAttribute("customer", customerService.findById(customerId));
 
         return "customers/show-customer";
     }
 
-    @GetMapping("/customers/{customerId}/edit")
+    @GetMapping("/{customerId}/edit")
     public String showUpdateForm(@PathVariable("customerId") Long customerId, Model model) {
         model.addAttribute("customer", customerService.findById(customerId));
         return "customers/add-update-customer";
     }
 
-    @PostMapping("/customers/{customerId}/edit")
+    @PostMapping("/{customerId}/edit")
     public String updateCustomer(@PathVariable("customerId") Long customerId, @Valid Customer customer, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (!(customerService.findById(customerId).getEmail().equals(customer.getEmail())) && (existByEmail(customer))) {

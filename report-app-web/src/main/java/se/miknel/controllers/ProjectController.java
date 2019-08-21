@@ -16,6 +16,7 @@ import se.miknel.services.ReportService;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/projects")
 public class ProjectController {
 
     private final CustomerService customerService;
@@ -28,13 +29,13 @@ public class ProjectController {
         this.reportService = reportService;
     }
 
-    @GetMapping("/projects/new")
+    @GetMapping("/new")
     public String showAddForm(Project project, Model model) {
         model.addAttribute("customers", customerService.findAll());
         return "projects/add-update-project";
     }
 
-    @PostMapping("/projects/new")
+    @PostMapping("/new")
     public String addProject(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (existByAddress(project)) {
@@ -65,13 +66,13 @@ public class ProjectController {
         return projectService.existsByAddress_StreetName(project.getAddress().getStreetName());
     }
 
-    @RequestMapping("/projects/")
+    @RequestMapping("/")
     public String showAllReports(Model model) {
         model.addAttribute("projects", projectService.findAll());
         return "projects/list-projects";
     }
 
-    @GetMapping("/projects/{projectId}/show")
+    @GetMapping("/{projectId}/show")
     public String showProject(@PathVariable("projectId") Long projectId, Model model) {
         model.addAttribute("project", projectService.findById(projectId));
         model.addAttribute("reports", reportService.findAll());
@@ -79,14 +80,14 @@ public class ProjectController {
         return "projects/show-project";
     }
 
-    @GetMapping("/projects/{projectId}/edit")
+    @GetMapping("/{projectId}/edit")
     public String editProject(@PathVariable("projectId") Long projectId, Model model) {
         model.addAttribute("project", projectService.findById(projectId));
         model.addAttribute("customers", customerService.findAll());
         return "projects/add-update-project";
     }
 
-    @PostMapping("/projects/{projectId}/edit")
+    @PostMapping("/{projectId}/edit")
     public String updateCustomer(@PathVariable("projectId") Long projectId, @Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         if (!(projectService.findById(projectId).getAddress().getStreetName().equals(project.getAddress().getStreetName())) && (existByAddress(project))) {

@@ -21,6 +21,7 @@ import java.util.Set;
 
 @Slf4j
 @Controller
+@RequestMapping("/reports")
 public class ReportController {
     private final ReportService reportService;
     private final ProjectService projectService;
@@ -32,14 +33,14 @@ public class ReportController {
         this.unitOfRestService = unitOfRestService;
     }
 
-    @GetMapping("/reports/new")
+    @GetMapping("/new")
     public String showAddForm(Report report, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
         model.addAttribute("projects", projectService.findAll());
         return "reports/add-update-report";
     }
 
-    @PostMapping("/reports/new")
+    @PostMapping("/new")
     public String addReport(@Valid Report report, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("units", unitOfRestService.findAll());
@@ -53,13 +54,13 @@ public class ReportController {
         return "redirect:/reports/" + report.getId() + "/show";
     }
 
-    @RequestMapping("/reports")
+    @RequestMapping("/")
     public String showAllReports(Model model) {
         model.addAttribute("reports", reportService.findAll());
         return "reports/list-reports";
     }
 
-    @RequestMapping("/reports/{reportId}/show")
+    @RequestMapping("/{reportId}/show")
     public String showReport(@PathVariable Long reportId, Model model) {
         Report report = reportService.findById(reportId);
         model.addAttribute("report", report);
@@ -73,7 +74,7 @@ public class ReportController {
         return "reports/show-report";
     }
 
-    @GetMapping("/reports/{reportId}/edit")
+    @GetMapping("/{reportId}/edit")
     public String editReport(@PathVariable("reportId") Long reportId, Model model) {
         model.addAttribute("units", unitOfRestService.findAll());
         model.addAttribute("projects", projectService.findAll());
@@ -82,7 +83,7 @@ public class ReportController {
         return "reports/add-update-report";
     }
 
-    @PostMapping("/reports/{reportId}/edit")
+    @PostMapping("/{reportId}/edit")
     public String updateReport(@PathVariable("reportId") Long reportId, @Valid Report report, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         report.setId(reportId);
 
@@ -98,13 +99,13 @@ public class ReportController {
         return "redirect:/reports/" + report.getId() + "/show";
     }
 
-    @GetMapping("/reports/{reportId}/remove")
+    @GetMapping("/{reportId}/remove")
     public String removeReport(@PathVariable("reportId") Long reportId, RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("success", "Deleted");
         reportService.deleteById(reportId);
 
-        return "redirect:/reports";
+        return "redirect:/reports/";
     }
 
 }
