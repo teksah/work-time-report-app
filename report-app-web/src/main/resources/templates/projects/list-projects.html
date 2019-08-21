@@ -65,10 +65,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(activeProjects)}">
-                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
-                        </tr>
-                        <tr th:each="project : ${activeProjects}">
+                        <tr th:each="project : ${projects}"
+                            th:if="${project.active}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>
@@ -104,10 +102,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(notActiveProjects)}">
-                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
-                        </tr>
-                        <tr th:each="project : ${notActiveProjects}">
+                        <tr th:each="project : ${projects}"
+                            th:unless="${project.active}">
                             <td th:text="${project.id}"></td>
                             <td>
                                 <a th:href="@{/projects/__${project.id}__/show}" th:text="${project.projectName}"></a>

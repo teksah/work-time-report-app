@@ -64,10 +64,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(activeCustomers)}">
-                            <td colspan="5" class="text-center"><span th:text="#{customers.no_customers}"></span></td>
-                        </tr>
-                        <tr th:each="customer : ${activeCustomers}">
+                        <tr th:each="customer : ${customers}"
+                            th:if="${customer.active}">
                             <td th:text="${customer.id}"></td>
                             <td>
                                 <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
@@ -100,10 +98,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(notActiveCustomers)}">
-                            <td colspan="5" class="text-center"><span th:text="#{customers.no_customers}"></span></td>
-                        </tr>
-                        <tr th:each="customer : ${notActiveCustomers}">
+                        <tr th:each="customer : ${customers}"
+                            th:unless="${customer.active}">
                             <td th:text="${customer.id}"></td>
                             <td>
                                 <a th:href="@{/customers/__${customer.id}__/show}" th:text="${customer}"></a>
@@ -135,9 +131,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${#lists.isEmpty(customers)}">
-                            <td colspan="5" class="text-center"><span th:text="#{projects.no_projects}"></span></td>
-                        </tr>
                         <tr th:each="customer : ${customers}">
                             <td th:text="${customer.id}"></td>
                             <td>
