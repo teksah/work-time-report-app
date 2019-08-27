@@ -1,3 +1,4 @@
+se/miknel/controllers/AuthController.class
 se/miknel/controllers/ReportController.class
 se/miknel/bootstrap/DataLoader.class
 se/miknel/security/SecurityConfiguration.class
