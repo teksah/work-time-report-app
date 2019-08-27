@@ -20,8 +20,8 @@ public class Customer extends Person {
         setActive(true);
     }
 
-    public Customer(String firstName, String lastName, String telephoneNumber, String email, Boolean active) {
-        super(firstName, lastName, telephoneNumber, email, active);
+    public Customer(String firstName, String lastName, String telephoneNumber, String email) {
+        super(firstName, lastName, telephoneNumber, email);
     }
 
     @Override

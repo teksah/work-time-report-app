@@ -33,12 +33,12 @@ public class Person extends BaseEntity{
     @NotNull(message = "{field.option.notNull}")
     private Boolean active;
 
-    public Person(String firstName, String lastName, String telephoneNumber, String email, Boolean active) {
+    public Person(String firstName, String lastName, String telephoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
-        this.active = active;
+        this.active = true;
     }
 
     @Override

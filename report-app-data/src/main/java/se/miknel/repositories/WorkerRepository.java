@@ -7,6 +7,8 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
     Worker findByFirstName(String firstName);
 
+    Worker findByUsername(String username);
+
     boolean existsByTelephoneNumber(String telephoneNumber);
 
     boolean existsByEmail(String email);

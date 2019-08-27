@@ -30,9 +30,22 @@ public class Worker extends Person {
             inverseJoinColumns = { @JoinColumn(name = "project_id")})
     private Set<Project> projects = new HashSet<>();
 
-    public Worker(WorkerType type, String firstName, String lastName, String telephoneNumber, String email, Boolean active) {
-        super(firstName, lastName, telephoneNumber, email, active);
+    private String username;
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "worker_role",
+            joinColumns = @JoinColumn(name = "worker_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    public Worker(String firstName, String lastName, String telephoneNumber, String email, WorkerType type, String username, String password) {
+        super(firstName, lastName, telephoneNumber, email);
         this.type = type;
+        this.username = username;
+        this.password = password;
     }
 
     public void addProject(Project project) {
@@ -43,6 +56,10 @@ public class Worker extends Person {
     public void removeProject(Project project) {
         this.projects.remove(project);
         project.getWorkers().remove(this);
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     @Override

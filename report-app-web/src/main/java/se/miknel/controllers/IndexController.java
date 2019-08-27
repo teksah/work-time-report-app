@@ -1,17 +1,17 @@
 package se.miknel.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
 
-    @RequestMapping({"", "index", "index.html", "/"})
+    @GetMapping("/")
     public String indexPage() {
         return "redirect:/reports/";
     }
 
-
-
+    @GetMapping("/login")
+    public String login(){return "security/login";}
 
 }

@@ -7,3 +7,5 @@ INSERT INTO worker_type (type) VALUES ('student');
 INSERT INTO worker_type (type) VALUES ('helper');
 INSERT INTO worker_type (type) VALUES ('electrician');
 
+
+

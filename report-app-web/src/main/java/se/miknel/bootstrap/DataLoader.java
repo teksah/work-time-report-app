@@ -1,6 +1,7 @@
 package se.miknel.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import se.miknel.model.*;
 import se.miknel.services.*;
@@ -17,22 +18,26 @@ public class DataLoader implements CommandLineRunner {
     private final ReportService reportService;
     private final UnitOfRestService unitOfRestService;
     private final WorkerTypeService workerTypeService;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
-    public DataLoader(WorkerService workerService, CustomerService customerService, ProjectService projectService, ReportService reportService, UnitOfRestService unitOfRestService, WorkerTypeService workerTypeService) {
+    public DataLoader(WorkerService workerService, CustomerService customerService, ProjectService projectService, ReportService reportService, UnitOfRestService unitOfRestService, WorkerTypeService workerTypeService, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.workerService = workerService;
         this.customerService = customerService;
         this.projectService = projectService;
         this.reportService = reportService;
         this.unitOfRestService = unitOfRestService;
         this.workerTypeService = workerTypeService;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        Customer customer1 = new Customer("Jan", "Fasola", "0735787921", "fasola@fasola.com", true);
-        Customer customer2 = new Customer("Pawel", "Gawel", "0725787984", "gawel@gawel.com", true);
-        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com", true);
+        Customer customer1 = new Customer("Jan", "Fasola", "0735787921", "fasola@fasola.com");
+        Customer customer2 = new Customer("Pawel", "Gawel", "0725787984", "gawel@gawel.com");
+        Customer customer3 = new Customer("Pawel", "Wasill", "0735283926", "pawel@wasillbygg.com");
 
         customerService.save(customer1);
         customerService.save(customer2);
@@ -53,21 +58,22 @@ public class DataLoader implements CommandLineRunner {
         projectService.save(project3);
         projectService.save(project4);
 
-        Worker worker1 = new Worker(workerTypeService.findById(3L), "Sebastian", "Bakowski", "1234567891", "sebbak90@gmail.com", true);
-        Worker worker2 = new Worker(workerTypeService.findById(2L), "Sebastianek", "Gaciarz", "3214567891", "gaciarz@gmail.com", true);
-        Worker worker3 = new Worker(workerTypeService.findById(3L), "Mariusz", "Gaciarz", "8884567891", "mariusz@gmail.com", true);
 
-        workerService.save(worker1);
-        workerService.save(worker2);
-        workerService.save(worker3);
+        WorkerType electrician = workerTypeService.findById(3l);
+        Role user = new Role("ROLE_USER");
+        roleService.save(user);
 
-        Report report1 = new Report(worker1, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "rywning grund");
-        Report report2 = new Report(worker2, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0.5)), "rywning grund");
-        Report report3 = new Report(worker3, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "kompletowanie");
-        Report report4 = new Report(worker1, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "spotkanie");
-        Report report5 = new Report(worker2, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
-        Report report6 = new Report(worker3, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
-        Report report7 = new Report(worker1, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "grund");
+        Worker antoni = new Worker("Antoni", "Parasolowicz", "1234567890", "parasol@parasol.pl", electrician, "antoni", passwordEncoder.encode("antoni"));
+        antoni.addRole(user);
+        workerService.save(antoni);
+
+        Report report1 = new Report(antoni, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "rywning grund");
+        Report report2 = new Report(antoni, LocalDate.of(2019, 3, 22), project1, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0.5)), "rywning grund");
+        Report report3 = new Report(antoni, LocalDate.of(2019, 3, 25), project2, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "kompletowanie");
+        Report report4 = new Report(antoni, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(0)), "spotkanie");
+        Report report5 = new Report(antoni, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
+        Report report6 = new Report(antoni, LocalDate.of(2019, 3, 27), project3, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "spotkanie");
+        Report report7 = new Report(antoni, LocalDate.of(2019, 3, 28), project4, LocalTime.of(7, 0), LocalTime.of(16, 0), unitOfRestService.findByValue(BigDecimal.valueOf(1)), "grund");
 
         reportService.save(report1);
         reportService.save(report2);

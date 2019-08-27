@@ -41,6 +41,11 @@ public class WorkerServiceImpl implements WorkerService{
     }
 
     @Override
+    public Worker findByUsername(String username) {
+        return workerRepository.findByUsername(username);
+    }
+
+    @Override
     public boolean existsByTelephoneNumber(String telephoneNumber) {
         return false;
     }
