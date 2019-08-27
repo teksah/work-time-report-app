@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{customers.customer_list}"></title>
+    <title th:text="#{index.title}"></title>
     <th:block th:include="fragments/common :: header-css-script"></th:block>
 </head>
 <body>
 <div class="container-fluid mt-4">
     <div th:replace="fragments/common :: menu-navbar"></div>
-    <div th:replace="fragments/common :: jumbotron"></div>
+    <div class="jumbotron jumbotron-fluid" th:fragment="jumbotron">
+        <div class="container" align="center">
+            <h2 class="display-4">Work Time Report App</h2>
+            <p class="lead">Small web-app using crud operation. Originally application was developed to organize work reports in the company I've worked.
+                Now, it is use as a demonstration app for my for future employers, hoping to get a job as a junior programmer... :-)
+                <br>
+                <br>
+                The project is still in development.</p>
+            <a href="https://github.com/teksah/work-time-report-app" class="btn btn-success" target="_blank"><i
+                    class="fab fa-github"></i> Github Repo</a>
+        </div>
+    </div>
     <div th:replace="fragments/common :: footer"></div>
 </div>
 </body>

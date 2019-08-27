@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 24px">
-                <a class="navbar-brand" style="font-size: 24px" href="#">MIKNEL</a>
+                <a class="navbar-brand" style="font-size: 24px" th:href="@{/}">MIKNEL</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -85,9 +85,9 @@
                         </li>
                         <li class="nav-item my-auto ml-1">
                             <form method="POST" th:action="@{/logout}" sec:authorize="authenticated">
-                                <button class="btn btn-outline-danger" type="submit">Logout</button>
+                                <button class="btn btn-outline-danger" type="submit" th:text="#{navbar.logout}"></button>
                             </form>
-                            <button class="btn btn-outline-info" sec:authorize="!authenticated" th:href="@{/login}" type="submit">Sign in</button>
+                            <button class="btn btn-outline-info" sec:authorize="!authenticated" th:href="@{/login}" type="submit" th:text="#{navbar.signin}"></button>
                         </li>
 
                     </ul>
@@ -106,19 +106,6 @@
             </span>
         </div>
     </footer>
-</div>
-
-<div class="jumbotron jumbotron-fluid" th:fragment="jumbotron">
-    <div class="container" align="center">
-        <h2 class="display-4">Work Time Report App</h2>
-        <p class="lead">Small web-app using crud operation. Originally application was developed to organize work reports in the company I've worked.
-            Now, it is use as a demonstration app for my for future employers, hoping to get a job as a junior programmer... :-)
-            <br>
-            <br>
-            The project is still being developed.</p>
-        <a href="https://github.com/teksah/work-time-report-app" class="btn btn-success" target="_blank"><i
-                class="fab fa-github"></i> Github Repo</a>
-    </div>
 </div>
 </body>
 </html>
