@@ -59,14 +59,14 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/reports/}"><span th:text="#{navbar.reports}"></span><span
+                            <a class="nav-link" sec:authorize="authenticated" th:href="@{/reports/}"><span th:text="#{navbar.reports}"></span><span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/projects/}"><span th:text="#{navbar.projects}"></span></a>
+                            <a class="nav-link" sec:authorize="authenticated" th:href="@{/projects/}"><span th:text="#{navbar.projects}"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/customers/}"><span th:text="#{navbar.customers}"></span></a>
+                            <a class="nav-link" sec:authorize="authenticated" th:href="@{/customers/}"><span th:text="#{navbar.customers}"></span></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -87,7 +87,7 @@
                             <form method="POST" th:action="@{/logout}" sec:authorize="authenticated">
                                 <button class="btn btn-outline-danger" type="submit" th:text="#{navbar.logout}"></button>
                             </form>
-                            <button class="btn btn-outline-info" sec:authorize="!authenticated" th:href="@{/login}" type="submit" th:text="#{navbar.signin}"></button>
+                            <a class="btn btn-outline-info" th:href="@{/login}" sec:authorize="!authenticated" th:text="#{navbar.signin}"></a>
                         </li>
 
                     </ul>
