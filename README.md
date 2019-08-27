@@ -4,7 +4,7 @@ Small web-app using crud operation. Originally application was developed to orga
 Now, it is use as a demonstration app for my for future employers, hoping to get a job as a junior programmer... :-)
 <br>
 <br>
-The project is still being developed.
+The project is still in development.
 
 
 ### Installing
