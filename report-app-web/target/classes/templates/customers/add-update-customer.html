@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:with="text=${customer['new']} ? #{customers.add} : #{customers.update.customer(${customer})}"
+           th:text="${text}"></title>
+    <th:block th:include="fragments/common :: header-css-script"></th:block>
+</head>
+<body>
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/common :: menu-navbar"></div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+
+            <!-- Form Title-->
+            <div class="page-header mb-4">
+                <h3 class="text-left"
+                    th:with="text=${customer['new']} ? #{customers.add} : #{customers.update}"
+                    th:text="${text}"></h3>
+            </div>
+
+            <!-- Form add update Project-->
+            <form th:object="${customer}" method="post">
+                <div th:if="*{id != null}" class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="active"
+                               th:text="#{customer.status}"></label>
+                        <select th:field="*{active}"
+                                th:class="${#fields.hasErrors('active')} ? 'form-control is-invalid' : 'form-control'"
+                                id="active">
+                            <option th:text="#{projects.choose}"
+                                    value=""></option>
+                            <option th:value="true"
+                                    th:text="#{project.toggle.active}">
+                            <option th:value="false"
+                                    th:text="#{project.toggle.not_active}">
+                        </select>
+                        <p th:errors="*{active}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName" th:text="#{theaders.first_name}"></label>
+                        <input type="text"
+                               th:field="*{firstName}" id="firstName"
+                               th:placeholder="#{theaders.first_name}"
+                               th:class="${#fields.hasErrors('firstName')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{firstName}" class="invalid-feedback"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastName" th:text="#{theaders.last_name}"></label>
+                        <input type="text" th:field="*{lastName}" id="lastName" th:placeholder="#{theaders.last_name}"
+                               th:class="${#fields.hasErrors('lastName')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{lastName}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="telephone" th:text="#{theaders.telephone_number}"></label>
+                        <input type="text" th:field="*{telephoneNumber}" id="telephone"
+                               th:placeholder="#{theaders.telephone_number}"
+                               th:class="${#fields.hasErrors('telephoneNumber')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{telephoneNumber}" class="invalid-feedback"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email" th:text="#{theaders.email}"></label>
+                        <input type="text" class="form-control" th:field="*{email}" id="email"
+                               th:placeholder="#{theaders.email}"
+                               th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{email}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <button th:with="text=${customer['new']} ? #{button.add} : #{button.update}"
+                        class="btn btn-primary" type="submit" th:text="${text}"></button>
+            </form>
+        </div>
+    </div>
+    <div th:replace="fragments/common :: footer">
+    </div>
+</div>
+</body>
+</html>

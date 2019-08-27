@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{reports.show.title(${report.workDate},${report.project.projectName},${report.worker})}"></title>
+    <th:block th:include="fragments/common :: header-css-script"></th:block>
+</head>
+<body>
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/common :: menu-navbar"></div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+
+            <!--Alerts-->
+            <div th:if="${success != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <th:block th:switch="${success}">
+                    <div th:case="'Added'">
+                        <span th:text="#{alert.report.add}"></span>
+                    </div>
+                    <div th:case="'Deleted'">
+                        <span th:text="#{alert.report.delete}"></span>
+                    </div>
+                    <div th:case="'Updated'">
+                        <span th:text="#{alert.report.update}"></span>
+                    </div>
+                </th:block>
+            </div>
+
+            <!--Table title and buttons-->
+            <div class="row mb-4">
+                <div class="page-header col-md-6">
+                    <h3 class="text-left" th:text="#{reports.information}"></h3>
+                </div>
+                <div class="col-md-6 text-right mt-auto">
+                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/new}" role="button">
+                        <span class="btn-label"><i class="fas fa-plus"></i></span>
+                        <span th:text="#{button.add.new}"></span>
+                    </a>
+                    <a class="btn btn-labeled btn-primary" th:href="@{/reports/__${report.id}__/edit}" role="button">
+                        <span class="btn-label"><i class="far fa-edit"></i></span>
+                        <span th:text="#{button.update}"></span>
+                    </a>
+                    <a class="btn btn-labeled btn-primary" role="button" href="#"
+                       data-toggle="modal"
+                       data-target="#modal-warning-1">
+                        <span class="btn-label"><i class="far fa-trash-alt"></i></span>
+                        <span th:text="#{button.remove}"></span>
+                    </a>
+                </div>
+                <div class="modal fade" id="modal-warning-1" tabindex="-1" role="dialog"
+                     aria-labelledby="modal-warningg" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-warningg1" th:text="#{modal.title}"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p th:text="#{modal.body}"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        th:text="#{modal.no}"></button>
+                                <a role="button" class="btn btn-primary" href="javascript:"
+                                   th:href="@{/reports/__${report.id}__/remove}" th:text="#{modal.yes}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Table of report-->
+            <table class="table table-striped mb-5" th:object="${report}">
+                <tr>
+                    <th th:text="#{reports.date}"></th>
+                    <td th:text="*{workDate}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.project_name}"></th>
+                    <td th:text="*{project.projectName}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.project_address}"></th>
+                    <td th:text="*{project.address.streetName}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.worker}"></th>
+                    <td th:text="*{worker}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.start_work}"></th>
+                    <td th:text="*{startWork}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.finish_work}"></th>
+                    <td th:text="*{finishWork}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.rest}"></th>
+                    <td th:text="*{unitOfRest}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.total}"></th>
+                    <td th:text="*{totalHours}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{reports.description}"></th>
+                    <td th:text="*{description}"></td>
+                </tr>
+            </table>
+
+            <!--Table title of reports related-->
+            <div class="row mb-2">
+                <div class="page-header col-md-6">
+                    <h3 class="text-left" th:text="#{reports.related}"></h3>
+                </div>
+            </div>
+
+            <!--Table of reports related-->
+            <table class="table table-hover table-sm">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th th:text="#{reports.date}"></th>
+                    <th th:text="#{reports.worker}"></th>
+                    <th th:text="#{reports.total}"></th>
+                    <th th:text="#{reports.description}"></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(reports)}">
+                    <td colspan="6" class="text-center"><span th:text="#{reports.no_reports}"></span></td>
+                </tr>
+                <tr th:each="report : ${reports}">
+                    <td th:text="${report.id}"></td>
+                    <td th:text="${report.workDate}"></td>
+                    <td th:text="${report.worker}"></td>
+                    <td th:text="${report.totalHours}"></td>
+                    <td th:text="${report.description}"></td>
+                    <td class="action-links">
+                        <a th:href="@{/reports/__${report.id}__/show}" class="action-links"
+                           th:title="#{tooltips.show}" data-tooltip="tooltip" style="margin-right: 7px"><i
+                                class="fas fa-external-link-alt"></i></a>
+                        <a th:href="@{/reports/__${report.id}__/edit}" class="action-links"
+                           th:title="#{tooltips.edit}" data-tooltip="tooltip" style="margin-right: 7px"><i
+                                class="far fa-edit"></i></a>
+                        <a class="action-links" href="#" th:title="#{tooltips.delete}" data-tooltip="tooltip"
+                           data-toggle="modal" data-target="#modal-warning"><i class="far fa-trash-alt"></i></a>
+                    </td>
+
+                    <!--Modal-->
+                    <div class="modal fade" id="modal-warning" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-warningg" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-warningg" th:text="#{modal.title}"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="#{modal.body}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            th:text="#{modal.no}"></button>
+                                    <a role="button" class="btn btn-primary" id="myWish" href="javascript:"
+                                       th:href="@{/reports/__${report.id}__/remove}" th:text="#{modal.yes}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div th:replace="fragments/common :: footer"></div>
+</div>
+</body>
+</html>

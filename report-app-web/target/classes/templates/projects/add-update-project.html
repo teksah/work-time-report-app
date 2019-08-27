@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:with="text=${project['new']} ? #{projects.add} : #{projects.update.project(${project})}"
+           th:text="${text}"></title>
+    <th:block th:include="fragments/common :: header-css-script"></th:block>
+</head>
+<body>
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/common :: menu-navbar"></div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+
+            <!-- Form Title-->
+            <div class="page-header mb-4">
+                <h3 class="text-left"
+                    th:with="text=${project['new']} ? #{projects.add} : #{projects.update}"
+                    th:text="${text}"></h3>
+            </div>
+
+            <!-- Form add update Project-->
+            <form th:object="${project}" method="post">
+                <div th:if="*{id != null}" class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="active"
+                               th:text="#{project.status}"></label>
+                        <select th:field="*{active}"
+                                th:class="${#fields.hasErrors('active')} ? 'form-control is-invalid' : 'form-control'"
+                                id="active">
+                            <option th:text="#{projects.choose}"
+                                    value=""></option>
+                            <option th:value="true"
+                                    th:text="#{project.toggle.active}">
+                            <option th:value="false"
+                                    th:text="#{project.toggle.not_active}">
+                        </select>
+                        <p th:errors="*{active}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="projectName" th:text="#{projects.project_name}"></label>
+                        <input type="text" class="form-control" th:field="*{projectName}" id="projectName"
+                               th:placeholder="#{projects.project_name}"
+                               th:class="${#fields.hasErrors('projectName')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{projectName}" class="invalid-feedback"></p>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="customer" th:text="#{projects.customer}"></label>
+                        <select th:field="*{customer}" id="customer" class="form-control"
+                                th:class="${#fields.hasErrors('customer')} ? 'form-control is-invalid' : 'form-control'">
+                            <option th:text="#{projects.choose}" value=""></option>
+                            <option th:each="customer : ${customers}"
+                                    th:if="${customer.active == true}"
+                                    th:value="${customer.id}"
+                                    th:text="${customer}">
+                            </option>
+                        </select>
+                        <p th:errors="*{customer}" class="invalid-feedback"></p>
+                    </div>
+                    <div class="form-group col-md-2 text-left">
+                        <label style="color: transparent;">Nowy</label>
+                        <a class="btn btn-outline-primary text-left" href="#"
+                           th:href="@{'/customers/new'}" role="button">
+                            <span th:text="#{button.add.new}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="streetAddress" th:text="#{projects.street_address}"></label>
+                        <input type="time" class="form-control" th:field="*{address.streetName}" id="streetAddress"
+                               th:placeholder="#{projects.street_address}"
+                               th:class="${#fields.hasErrors('address.streetName')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{address.streetName}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="zipCode" th:text="#{projects.zip_code}"></label>
+                        <input type="text" class="form-control" th:field="*{address.zipCode}" id="zipCode"
+                               th:placeholder="#{projects.zip_code}"
+                               th:class="${#fields.hasErrors('address.zipCode')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{address.zipCode}" class="invalid-feedback"></p>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="city" th:text="#{projects.city}"></label>
+                        <input type="text" class="form-control" th:field="*{address.city}" id="city"
+                               th:placeholder="#{projects.city}"
+                               th:class="${#fields.hasErrors('address.city')} ? 'form-control is-invalid' : 'form-control'">
+                        <p th:errors="*{address.city}" class="invalid-feedback"></p>
+                    </div>
+                </div>
+                <button th:with="text=${project['new']} ? #{button.add} : #{button.update}"
+                        class="btn btn-primary" type="submit" th:text="${text}"></button>
+            </form>
+
+        </div>
+    </div>
+    <div th:replace="fragments/common :: footer"></div>
+</div>
+</body>
+</html>

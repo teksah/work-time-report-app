@@ -1,0 +1,12 @@
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/config/LocaleAndInterceptorConfiguration.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/security/UserPrincipalDetailsService.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/WorkTimeReportAppApplication.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/controllers/ReportController.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/bootstrap/DataLoader.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/config/CustomMessageSourceConfiguration.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/controllers/IndexController.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/controllers/ProjectController.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/controllers/WorkerController.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/controllers/CustomerController.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/security/UserPrincipal.java
+/Users/sebastian/Desktop/MIKNEL/work-time-report-app/report-app-web/src/main/java/se/miknel/security/SecurityConfiguration.java
