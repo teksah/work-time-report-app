@@ -1,6 +1,10 @@
 # Work Time Report App
 
-Small web-app using crud operation. Application was created to organize work reports in the company.<br>Still under construction...
+Small web-app using crud operation. Originally application was developed to organize work reports in the company I've worked.
+Now, it is use as a demonstration app for my for future employers, hoping to get a job as a junior programmer... :-)
+<br>
+<br>
+The project is still being developed.
 
 
 ### Installing
@@ -19,7 +23,7 @@ Or you can run it from Maven directly using the Spring Boot Maven plugin.
 
 
 Then, you can then access application here: [http://localhost:8080/](http://localhost:8080/)<br>
-With credentials - username: antoni - password: antoni
+With credentials USERNAME: antoni - PASSWORD: antoni
 
 
 

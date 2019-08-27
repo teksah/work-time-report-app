@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{customers.customer_list}"></title>
+    <th:block th:include="fragments/common :: header-css-script"></th:block>
+</head>
+<body>
+<div class="container-fluid mt-4">
+    <div th:replace="fragments/common :: menu-navbar"></div>
+    <div th:replace="fragments/common :: jumbotron"></div>
+    <div th:replace="fragments/common :: footer"></div>
+</div>
+</body>
+</html>

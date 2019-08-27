@@ -16,7 +16,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) {
         Worker worker = this.workerService.findByUsername(s);
 
         if (worker == null) {
