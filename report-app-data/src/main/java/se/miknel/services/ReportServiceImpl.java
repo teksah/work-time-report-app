@@ -1,5 +1,8 @@
 package se.miknel.services;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.miknel.model.Project;
@@ -36,16 +39,19 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     @Override
     public Report save(Report object) {
-        Optional<Worker> workerOptional = workerRepository.findById(1L);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (workerOptional.isPresent()) {
-            Worker worker = workerOptional.get();
-            object.setWorker(worker);
-            object.calculateTotalHours();
-            worker.addProject(object.getProject());
-
-            workerRepository.save(worker);
+        String currentUserName=null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
         }
+
+        Worker worker = workerRepository.findByUsername(currentUserName);
+        object.setWorker(worker);
+        object.calculateTotalHours();
+        worker.addProject(object.getProject());
+        workerRepository.save(worker);
+
         return reportRepository.save(object);
     }
 

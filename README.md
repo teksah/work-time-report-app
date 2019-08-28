@@ -23,7 +23,8 @@ Or you can run it from Maven directly using the Spring Boot Maven plugin.
 
 
 Then, you can then access application here: [http://localhost:8080/](http://localhost:8080/)<br>
-With credentials USERNAME: antoni - PASSWORD: antoni
+username: antoni - password: antoni - with user role <br> 
+username: jaroslaw - password: jaroslaw - with user role
 
 
 
