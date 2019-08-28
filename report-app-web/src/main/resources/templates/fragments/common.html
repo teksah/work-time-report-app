@@ -100,9 +100,10 @@
     <footer class="footer">
         <div class="container text-center">
             <span class="text-muted">
-                &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span>
+                - &copy; Copyright <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}"></span>
                 - MIKNEL Installation | Service -
-                <span th:text="#{footer.today(${#calendars.format(#calendars.createNow(), 'dd MMM yyyy')})}"></span>
+                <span th:text="#{footer.today(${#calendars.format(#calendars.createNow(), 'dd MMM yyyy')})}"></span> -
+                <span sec:authorize="authenticated" sec:authentication="name"></span>
             </span>
         </div>
     </footer>
