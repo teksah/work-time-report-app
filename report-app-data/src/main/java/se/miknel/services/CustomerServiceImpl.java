@@ -3,12 +3,10 @@ package se.miknel.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import se.miknel.model.Customer;
-import se.miknel.model.Project;
 import se.miknel.repositories.CustomerRepository;
 import se.miknel.repositories.ProjectRepository;
 
 import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Service
@@ -32,20 +30,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer save(Customer customer) {
-
-        if (!customer.getActive()) {
-            log.info("CUSTOMER NIE ACTYWNY");
-
-            List<Project> projects = Objects.requireNonNull(customerRepository.findById(customer.getId()).orElse(null)).getProjects();
-
-            for (Project project : projects) {
-                project.setActive(false);
-            }
-
-            System.out.println("projekty " + projects);
-
-        }
-
         return customerRepository.save(customer);
     }
 
