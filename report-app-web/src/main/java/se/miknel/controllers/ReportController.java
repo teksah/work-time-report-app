@@ -19,6 +19,7 @@ import se.miknel.services.WorkerService;
 
 import javax.validation.Valid;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -65,7 +66,11 @@ public class ReportController {
     public String showMyReports(Model model, Authentication authentication) {
         String currentUser = authentication.getName();
 
-        model.addAttribute("reports", reportService.findAll());
+        Set<Report> myReports = reportService.findAll().stream()
+                .filter(report -> report.getWorker().getUsername().equals(currentUser))
+                .collect(Collectors.toSet());
+
+        model.addAttribute("reports", myReports);
         return "reports/list-reports";
     }
 

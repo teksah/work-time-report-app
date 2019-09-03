@@ -36,6 +36,7 @@ insert into unit_of_rest (id, value) VALUES (3, 1);
 
 --ROLES
 insert into role (id, name) values (1, 'ROLE_USER');
+insert into role (id, name) values (2, 'ROLE_ADMIN');
 ----------
 
 --WORKERS
@@ -46,6 +47,10 @@ insert into worker_role (worker_id, role_id) values (1, 1);
 insert into worker (id, active, email, first_name, last_name, telephone_number, password, type_id, username)
     values (2, TRUE, 'antoni@antoni.pl', 'Antoni', 'Antonowicz', '1234567890', '$2a$10$5hc8Ne72dRmh4uJDBntpReNeKu.QTRmEK3Fgdynp8vGkUUNXIw3d.', 1, 'antoni');
 insert into worker_role (worker_id, role_id) values (2, 1);
+
+insert into worker (id, active, email, first_name, last_name, telephone_number, password, type_id, username)
+values (3, TRUE, 'admin@admin.pl', 'Admin', 'Adminowicz', '0989765267', '$2a$04$uqHSunVw7cVxFYlRCjklgulSzLqNgTl5TR3/gB8sDST7LDr6/tPvO', 2, 'admin');
+insert into worker_role (worker_id, role_id) values (3, 2);
 ----------
 
 --REPORTS

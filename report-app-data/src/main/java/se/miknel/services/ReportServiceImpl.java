@@ -70,4 +70,9 @@ public class ReportServiceImpl implements ReportService {
         return reportRepository.findReportsByProject(project);
     }
 
+    @Override
+    public Set<Report> findAllByWorker(Worker worker) {
+        return reportRepository.findAllByWorker(worker);
+    }
+
 }

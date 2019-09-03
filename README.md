@@ -22,9 +22,15 @@ Or you can run it from Maven directly using the Spring Boot Maven plugin.
 ```
 
 
-Then, you can then access application here: [http://localhost:8080/](http://localhost:8080/)<br>
-username: antoni - password: antoni - with user role <br> 
-username: jaroslaw - password: jaroslaw - with user role
+Then, you can then access application here: [http://localhost:8080/](http://localhost:8080/)<br><br>
+
+## Sign in
+By default, there are 3 users: 2 with user role and 1 with admin role
+
+username: antoni - password: antoni - with USER role <br> 
+username: jaroslaw - password: jaroslaw - with USER role
+<br><br>
+username: admin - password: admin - with ADMIN role
 
 
 
