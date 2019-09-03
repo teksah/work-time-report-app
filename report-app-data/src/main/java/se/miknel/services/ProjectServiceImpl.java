@@ -1,6 +1,7 @@
 package se.miknel.services;
 
 import org.springframework.stereotype.Service;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Project;
 import se.miknel.repositories.ProjectRepository;
 
@@ -22,7 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findById(Long aLong) {
-        return projectRepository.findById(aLong).orElse(null);
+        return projectRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Override

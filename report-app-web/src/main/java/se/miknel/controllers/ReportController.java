@@ -1,14 +1,15 @@
 package se.miknel.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Project;
 import se.miknel.model.Report;
 import se.miknel.services.ProjectService;
@@ -54,8 +55,16 @@ public class ReportController {
         return "redirect:/reports/" + report.getId() + "/show";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/all")
     public String showAllReports(Model model) {
+        model.addAttribute("reports", reportService.findAll());
+        return "reports/list-reports";
+    }
+
+    @RequestMapping("/my")
+    public String showMyReports(Model model, Authentication authentication) {
+        String currentUser = authentication.getName();
+
         model.addAttribute("reports", reportService.findAll());
         return "reports/list-reports";
     }
@@ -106,6 +115,15 @@ public class ReportController {
         reportService.deleteById(reportId);
 
         return "redirect:/reports/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+
+        return modelAndView;
     }
 
 }

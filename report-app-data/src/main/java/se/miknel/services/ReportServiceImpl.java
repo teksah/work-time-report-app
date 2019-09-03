@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Project;
 import se.miknel.model.Report;
 import se.miknel.model.Worker;
@@ -12,7 +13,6 @@ import se.miknel.repositories.ReportRepository;
 import se.miknel.repositories.WorkerRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -33,7 +33,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Report findById(Long aLong) {
-        return reportRepository.findById(aLong).orElse(null);
+        return reportRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Transactional
@@ -59,12 +59,9 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void deleteById(Long aLong) {
         Report object = findById(aLong);
-        Optional<Worker> workerOptional = workerRepository.findById(object.getWorker().getId());
+        Worker worker = workerRepository.findById(object.getWorker().getId()).orElseThrow(NotFoundException::new);
+        worker.removeProject(object.getProject());
 
-        if (workerOptional.isPresent()) {
-            Worker worker = workerOptional.get();
-            worker.removeProject(object.getProject());
-        }
         reportRepository.deleteById(aLong);
     }
 

@@ -2,6 +2,7 @@ package se.miknel.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Customer;
 import se.miknel.repositories.CustomerRepository;
 import se.miknel.repositories.ProjectRepository;
@@ -25,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer findById(Long aLong) {
-        return customerRepository.findById(aLong).orElse(null);
+        return customerRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Override

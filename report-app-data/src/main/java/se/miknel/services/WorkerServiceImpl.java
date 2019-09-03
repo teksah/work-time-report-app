@@ -1,6 +1,7 @@
 package se.miknel.services;
 
 import org.springframework.stereotype.Service;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Worker;
 import se.miknel.repositories.WorkerRepository;
 
@@ -22,7 +23,7 @@ public class WorkerServiceImpl implements WorkerService{
 
     @Override
     public Worker findById(Long aLong) {
-        return workerRepository.findById(aLong).orElse(null);
+        return workerRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Override

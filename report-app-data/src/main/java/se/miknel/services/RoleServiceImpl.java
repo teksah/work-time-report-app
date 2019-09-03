@@ -1,6 +1,7 @@
 package se.miknel.services;
 
 import org.springframework.stereotype.Service;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.Role;
 import se.miknel.repositories.RoleRepository;
 
@@ -21,7 +22,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(Long aLong) {
-        return roleRepository.findById(aLong).orElse(null);
+        return roleRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Override

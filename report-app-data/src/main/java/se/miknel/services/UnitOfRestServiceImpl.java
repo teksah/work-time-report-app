@@ -1,6 +1,7 @@
 package se.miknel.services;
 
 import org.springframework.stereotype.Service;
+import se.miknel.exceptions.NotFoundException;
 import se.miknel.model.UnitOfRest;
 import se.miknel.repositories.UnitOfRestRepository;
 
@@ -23,7 +24,7 @@ public class UnitOfRestServiceImpl implements UnitOfRestService {
 
     @Override
     public UnitOfRest findById(Long aLong) {
-        return unitOfRestRepository.findById(aLong).orElse(null);
+        return unitOfRestRepository.findById(aLong).orElseThrow(NotFoundException::new);
     }
 
     @Override
