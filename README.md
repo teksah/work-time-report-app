@@ -1,7 +1,6 @@
 # Work Time Report App
 
-Small web-app using crud operation. Originally application was developed to organize work reports in the company I've worked.
-Now, it is use as a demonstration app for my for future employers, hoping to get a job as a junior programmer. :-)
+Small web-app using crud operation.
 <br>
 <br>
 The project is still in development.
